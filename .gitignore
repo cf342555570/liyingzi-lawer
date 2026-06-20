@@ -1,6 +1,7 @@
 node_modules/
 .chrome-profiles/
 %SystemDrive%/
+dist/
 buerlawyer-dist.tar.gz
 huaweicloud-*.png
 *.tar.gz

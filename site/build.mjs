@@ -20,7 +20,7 @@ import { renderMdPage } from "./components/md-page.mjs";
 import { siteConfig } from "./data/site-config.mjs";
 
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
-const output = join(root, "dist");
+const output = join(root, "docs");
 const origin = siteConfig.origin;
 
 const pages = [
