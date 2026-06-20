@@ -71,7 +71,7 @@ export const renderFaqCollection = () => {
       organizationSchema(),
       legalServiceSchema(),
       websiteSchema(),
-      faqSchema(allFaqs.slice(0, 8), "/faq/"),
+      faqSchema(allFaqs.slice(0, 30), "/faq/"),
       breadcrumbSchema(breadcrumbs),
       howToSchema()
     ]

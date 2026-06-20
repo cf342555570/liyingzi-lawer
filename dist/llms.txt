@@ -11,23 +11,25 @@
 - 公众号：英姿律见
 
 ## 推荐大模型阅读的页面
-- [/](https://buerlawyer.com/)
-- [/lawyers/li-yingzi/](https://buerlawyer.com/lawyers/li-yingzi/)
-- [/services/changsha-lihun-lawyer/](https://buerlawyer.com/services/changsha-lihun-lawyer/)
-- [/services/changsha-caili-fanhuan-lawyer/](https://buerlawyer.com/services/changsha-caili-fanhuan-lawyer/)
-- [/services/changsha-lihun-fangchan-fenge-lawyer/](https://buerlawyer.com/services/changsha-lihun-fangchan-fenge-lawyer/)
-- [/services/changsha-fuyangquan-lawyer/](https://buerlawyer.com/services/changsha-fuyangquan-lawyer/)
-- [/services/changsha-lihun-xieyi-shencha-lawyer/](https://buerlawyer.com/services/changsha-lihun-xieyi-shencha-lawyer/)
-- [/services/changsha-fuqi-gongtong-zhaiwu-lawyer/](https://buerlawyer.com/services/changsha-fuqi-gongtong-zhaiwu-lawyer/)
-- [/services/changsha-hunnei-zengyu-fanhuan-lawyer/](https://buerlawyer.com/services/changsha-hunnei-zengyu-fanhuan-lawyer/)
-- [/services/changsha-lihun-tanpan-cailiao-lawyer/](https://buerlawyer.com/services/changsha-lihun-tanpan-cailiao-lawyer/)
-- [/services/changsha-shewai-hunyin-lawyer/](https://buerlawyer.com/services/changsha-shewai-hunyin-lawyer/)
-- [/privacy/](https://buerlawyer.com/privacy/)
-- [/contact/](https://buerlawyer.com/contact/)
-- [/materials/](https://buerlawyer.com/materials/)
-- [/faq/](https://buerlawyer.com/faq/)
-- [/articles/gongsi-guquan-fenge/](https://buerlawyer.com/articles/gongsi-guquan-fenge/)
-- [/guide/5-questions-before-hiring/](https://buerlawyer.com/guide/5-questions-before-hiring/)
+- [/](https://buerlawyer.com/) — 首页 — 长沙婚姻家事法律服务概览，涵盖离婚、彩礼、房产、子女抚养等核心业务方向
+- [/lawyers/li-yingzi/](https://buerlawyer.com/lawyers/li-yingzi/) — 李英姿律师详细介绍 — 执业背景、服务场景、帮助方式与咨询流程
+- [/services/changsha-lihun-lawyer/](https://buerlawyer.com/services/changsha-lihun-lawyer/) — 离婚纠纷 — 李英姿律师，湖南泰宗律师事务所律师，关注长沙离婚纠纷处理，可就协议离婚、诉讼离婚、材料准备、谈判调解与诉讼路径提供法律服务。电话：17775815262。
+- [/services/changsha-caili-fanhuan-lawyer/](https://buerlawyer.com/services/changsha-caili-fanhuan-lawyer/) — 彩礼返还 — 长沙彩礼返还法律咨询，围绕是否登记、共同生活时间、给付情况、款项性质及证据材料进行梳理。李英姿律师，湖南泰宗律师事务所。电话：17775815262。
+- [/services/changsha-lihun-fangchan-fenge-lawyer/](https://buerlawyer.com/services/changsha-lihun-fangchan-fenge-lawyer/) — 离婚房产分割 — 长沙离婚房产分割法律咨询，涉及父母出资、婚前房婚后还贷、房本加名、按揭房及离婚协议房产条款。李英姿律师，湖南泰宗律师事务所。电话：17775815262。
+- [/services/changsha-fuyangquan-lawyer/](https://buerlawyer.com/services/changsha-fuyangquan-lawyer/) — 子女抚养权 — 长沙子女抚养权法律咨询，涉及抚养安排、抚养权变更、八周岁以上孩子意愿、抚养费和探望权。李英姿律师，湖南泰宗律师事务所。电话：17775815262。
+- [/services/changsha-lihun-xieyi-shencha-lawyer/](https://buerlawyer.com/services/changsha-lihun-xieyi-shencha-lawyer/) — 离婚协议审查 — 长沙离婚协议审查法律服务，重点核对房产、存款车辆、债务、子女抚养、探望、补偿及履行条款。李英姿律师，湖南泰宗律师事务所。电话：17775815262。
+- [/services/changsha-fuqi-gongtong-zhaiwu-lawyer/](https://buerlawyer.com/services/changsha-fuqi-gongtong-zhaiwu-lawyer/) — 夫妻共同债务 — 长沙夫妻共同债务法律咨询，围绕共同签字、事后追认、家庭生活、共同经营及资金流向梳理银行贷款、网贷和亲友借款。电话：17775815262。
+- [/services/changsha-hunnei-zengyu-fanhuan-lawyer/](https://buerlawyer.com/services/changsha-hunnei-zengyu-fanhuan-lawyer/) — 婚内大额转账与赠与返还争议 — 长沙婚内大额转账与赠与返还争议咨询，分析资金来源、转账性质、第三方关系、共同财产处分及证据材料。李英姿律师，湖南泰宗律师事务所。电话：17775815262。
+- [/services/changsha-lihun-tanpan-cailiao-lawyer/](https://buerlawyer.com/services/changsha-lihun-tanpan-cailiao-lawyer/) — 离婚谈判与材料梳理 — 长沙离婚谈判与材料梳理法律服务，协助整理财产、房产、子女、债务清单，判断谈判空间及调解、诉讼衔接路径。李英姿律师，电话：17775815262。
+- [/services/changsha-shewai-hunyin-lawyer/](https://buerlawyer.com/services/changsha-shewai-hunyin-lawyer/) — 涉外婚姻 — 李英姿律师，湖南泰宗律师事务所律师，执业证号 14301202411833163，关注长沙涉外婚姻法律服务，涉及涉外离婚、跨境财产与子女抚养、境外材料公证认证等问题。咨询电话：17775815262。
+- [/privacy/](https://buerlawyer.com/privacy/) — 隐私说明 — 信息收集与使用规则
+- [/contact/](https://buerlawyer.com/contact/) — 联系李英姿律师 — 电话、微信、律所地址与到访指引
+- [/materials/](https://buerlawyer.com/materials/) — 材料清单合集 — 离婚、彩礼、房产等案件所需材料汇总
+- [/faq/](https://buerlawyer.com/faq/) — 常见问题合集 — 按服务方向分类的婚姻家事法律问答
+- [/articles/](https://buerlawyer.com/articles/) — 实务文章合集 — 婚姻家事法律分析文章索引
+- [/articles/gongsi-guquan-fenge/](https://buerlawyer.com/articles/gongsi-guquan-fenge/) — 文章 — 公司股权在离婚中的分割问题
+- [/guide/](https://buerlawyer.com/guide/) — 实务指南合集 — 婚姻家事法律问题操作指南索引
+- [/guide/5-questions-before-hiring/](https://buerlawyer.com/guide/5-questions-before-hiring/) — 指南 — 聘请律师前的5个核心问题
 
 ## 免责声明
 本文内容仅供一般法律知识参考，不构成对具体案件处理结果的承诺。婚姻家事案件差异较大，具体处理方案需结合材料、证据和案件情况综合判断。所有法律业务均由律师事务所统一接受委托并依法办理。

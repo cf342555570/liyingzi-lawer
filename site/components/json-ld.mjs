@@ -55,7 +55,13 @@ export const organizationSchema = () =>
     telephone: siteConfig.phone,
     address: postalAddress(),
     areaServed: [area("City", siteConfig.city), area("AdministrativeArea", siteConfig.province)],
-    member: { "@id": siteConfig.entityIds.person }
+    member: { "@id": siteConfig.entityIds.person },
+    openingHoursSpecification: {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      opens: "09:00",
+      closes: "18:00"
+    }
   });
 
 export const legalServiceSchema = () =>
@@ -71,7 +77,14 @@ export const legalServiceSchema = () =>
     address: postalAddress(),
     areaServed: area("City", siteConfig.city),
     parentOrganization: { "@id": siteConfig.entityIds.organization },
-    provider: { "@id": siteConfig.entityIds.person }
+    provider: { "@id": siteConfig.entityIds.person },
+    priceRange: "¥¥",
+    openingHoursSpecification: {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      opens: "09:00",
+      closes: "18:00"
+    }
   });
 
 export const servicePageSchema = (service) =>
@@ -141,6 +154,23 @@ export const howToSchema = () => ({
     text
   }))
 });
+
+export const speakableSchema = (path, cssSelector = ".hero-copy h1, .hero-intro") => ({
+  "@context": "https://schema.org",
+  "@type": "SpeakableSpecification",
+  cssSelector: [cssSelector]
+});
+
+export const contactPageSchema = () =>
+  compact({
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    url: absoluteUrl("/contact/"),
+    name: "联系李英姿律师",
+    description: "通过电话或微信联系李英姿律师，咨询长沙婚姻家事法律服务。",
+    about: { "@id": siteConfig.entityIds.legalService },
+    provider: { "@id": siteConfig.entityIds.person }
+  });
 
 export const articleSchema = ({ title, description, path, datePublished, author }) =>
   compact({

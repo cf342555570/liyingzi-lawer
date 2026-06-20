@@ -2,7 +2,7 @@ import { siteConfig, relativeAsset } from "../data/site-config.mjs";
 import { lawyer } from "../data/li-yingzi.mjs";
 import { escapeHtml, renderBreadcrumbs, renderLayout } from "../components/layout.mjs";
 import { sectionHeading } from "../components/sections.mjs";
-import { breadcrumbSchema, legalServiceSchema, organizationSchema, personSchema, websiteSchema } from "../components/json-ld.mjs";
+import { breadcrumbSchema, contactPageSchema, legalServiceSchema, organizationSchema, personSchema, speakableSchema, websiteSchema } from "../components/json-ld.mjs";
 
 export const contactMeta = Object.freeze({
   path: "/contact/",
@@ -42,7 +42,7 @@ export const renderContactPage = () => {
             <span class="card-dot" aria-hidden="true"></span>
             <div>
               <p class="eyebrow">微信联系</p>
-              <img src="${relativeAsset(contactMeta.path, lawyer.wechatQrPath)}" alt="李英姿律师微信二维码" class="wechat-qr-img" width="160" height="160">
+              <img src="${relativeAsset(contactMeta.path, lawyer.wechatQrPath)}" alt="李英姿律师微信二维码" class="wechat-qr-img" width="160" height="160" loading="lazy">
               <p>扫码添加微信进行初步沟通。是否建立正式委托关系，以双方后续签署书面委托合同为准。</p>
             </div>
           </div>
@@ -96,6 +96,6 @@ export const renderContactPage = () => {
   return renderLayout({
     ...contactMeta,
     body,
-    schemas: [personSchema(), organizationSchema(), legalServiceSchema(), websiteSchema(), breadcrumbSchema(breadcrumbs)]
+    schemas: [personSchema(), organizationSchema(), legalServiceSchema(), websiteSchema(), breadcrumbSchema(breadcrumbs), contactPageSchema(), speakableSchema("/contact/")]
   });
 };

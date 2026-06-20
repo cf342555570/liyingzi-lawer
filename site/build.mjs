@@ -10,7 +10,9 @@ import { renderContactPage } from "./pages/contact.mjs";
 import { renderMaterials } from "./pages/materials.mjs";
 import { renderFaqCollection } from "./pages/faq-collection.mjs";
 import { renderArticle } from "./pages/articles/gongsi-guquan-fenge.mjs";
+import { renderArticlesIndex } from "./pages/articles/index.mjs";
 import { renderGuide } from "./pages/guide/5-questions-before-hiring.mjs";
+import { renderGuideIndex } from "./pages/guide/index.mjs";
 import { servicePages } from "./data/service-pages.mjs";
 import { services } from "./data/services.mjs";
 import { renderServicePage } from "./components/service-page-template.mjs";
@@ -33,7 +35,9 @@ const extraPages = [
   [join("contact", "index.html"), renderContactPage()],
   [join("materials", "index.html"), renderMaterials()],
   [join("faq", "index.html"), renderFaqCollection()],
+  [join("articles", "index.html"), renderArticlesIndex()],
   [join("articles", "gongsi-guquan-fenge", "index.html"), renderArticle()],
+  [join("guide", "index.html"), renderGuideIndex()],
   [join("guide", "5-questions-before-hiring", "index.html"), renderGuide()]
 ];
 
@@ -45,7 +49,9 @@ const allPagePaths = [
   "/contact/",
   "/materials/",
   "/faq/",
+  "/articles/",
   "/articles/gongsi-guquan-fenge/",
+  "/guide/",
   "/guide/5-questions-before-hiring/"
 ];
 
@@ -97,8 +103,7 @@ for (const [relativePath, html] of all) {
 
 await cp(join(root, "site", "static"), join(output, "assets"), { recursive: true });
 
-// Copy admin files
-await cp(join(root, "site", "admin"), join(output, "admin"), { recursive: true });
+// Admin files are NOT deployed to production; used only via local dev server
 
 // CSS fingerprinting
 const cssPath = join(output, "assets", "styles.css");
@@ -123,13 +128,22 @@ try {
 await writeFile(join(output, "robots.txt"), [
   "User-agent: *",
   "Allow: /",
+  "Disallow: /admin/",
   "",
   `Sitemap: ${origin}/sitemap.xml`
 ].join("\n") + "\n", "utf8");
 
 // sitemap.xml
+const today = new Date().toISOString().split("T")[0];
+const getPriority = (path) => {
+  if (path === "/") return "1.0";
+  if (path === "/lawyers/li-yingzi/") return "0.9";
+  if (path.startsWith("/services/")) return "0.8";
+  if (path === "/faq/" || path === "/materials/" || path === "/contact/") return "0.7";
+  return "0.6";
+};
 const sitemapEntries = allPagePaths.map((path) =>
-  `  <url><loc>${origin}${path}</loc><changefreq>monthly</changefreq><priority>${path === "/" ? "1.0" : path.startsWith("/services/") ? "0.8" : "0.7"}</priority></url>`
+  `  <url><loc>${origin}${path}</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>${getPriority(path)}</priority></url>`
 ).join("\n");
 
 await writeFile(join(output, "sitemap.xml"), [
@@ -140,6 +154,21 @@ await writeFile(join(output, "sitemap.xml"), [
 ].join("\n") + "\n", "utf8");
 
 // llms.txt
+const pageDescriptions = {
+  "/": "首页 — 长沙婚姻家事法律服务概览，涵盖离婚、彩礼、房产、子女抚养等核心业务方向",
+  "/lawyers/li-yingzi/": "李英姿律师详细介绍 — 执业背景、服务场景、帮助方式与咨询流程",
+  "/faq/": "常见问题合集 — 按服务方向分类的婚姻家事法律问答",
+  "/materials/": "材料清单合集 — 离婚、彩礼、房产等案件所需材料汇总",
+  "/contact/": "联系李英姿律师 — 电话、微信、律所地址与到访指引",
+  "/privacy/": "隐私说明 — 信息收集与使用规则",
+  "/articles/": "实务文章合集 — 婚姻家事法律分析文章索引",
+  "/articles/gongsi-guquan-fenge/": "文章 — 公司股权在离婚中的分割问题",
+  "/guide/": "实务指南合集 — 婚姻家事法律问题操作指南索引",
+  "/guide/5-questions-before-hiring/": "指南 — 聘请律师前的5个核心问题"
+};
+const serviceDesc = Object.fromEntries(
+  servicePages.map((s) => [`${s.path}`, `${s.name} — ${s.description}`])
+);
 await writeFile(join(output, "llms.txt"), [
   `# ${siteConfig.name}`,
   `> ${siteConfig.slogan}`,
@@ -154,7 +183,10 @@ await writeFile(join(output, "llms.txt"), [
   `- 公众号：英姿律见`,
   "",
   "## 推荐大模型阅读的页面",
-  ...allPagePaths.map((path) => `- [${path}](${origin}${path})`),
+  ...allPagePaths.map((path) => {
+    const desc = pageDescriptions[path] || serviceDesc[path] || "";
+    return desc ? `- [${path}](${origin}${path}) — ${desc}` : `- [${path}](${origin}${path})`;
+  }),
   "",
   "## 免责声明",
   siteConfig.disclaimer

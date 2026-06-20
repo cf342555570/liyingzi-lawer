@@ -11,6 +11,7 @@ import {
   legalServiceSchema,
   organizationSchema,
   personSchema,
+  speakableSchema,
   websiteSchema
 } from "../components/json-ld.mjs";
 
@@ -52,7 +53,7 @@ export const renderHome = () => {
           <p class="legal-note">${siteConfig.sloganNotice}</p>
         </div>
         <aside class="identity-panel" aria-label="律师身份信息">
-          <figure class="lawyer-photo"><img src="${relativeAsset(homeMeta.path, lawyer.imagePath)}" alt="李英姿律师在办公场景中审阅材料" width="1672" height="939"></figure>
+          <figure class="lawyer-photo"><img src="${relativeAsset(homeMeta.path, lawyer.imagePath)}" alt="李英姿律师在办公场景中审阅材料" width="1672" height="939" fetchpriority="high" loading="eager"></figure>
           <p class="eyebrow">身份信息</p>
           <h2>${lawyer.displayName}</h2>
           <dl>
@@ -103,7 +104,8 @@ export const renderHome = () => {
       websiteSchema(),
       faqSchema(homeFaqs, "/"),
       breadcrumbSchema(breadcrumbs),
-      howToSchema()
+      howToSchema(),
+      speakableSchema("/", ".hero-copy h1, .hero-intro")
     ]
   });
 };

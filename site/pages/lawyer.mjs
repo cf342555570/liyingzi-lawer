@@ -11,6 +11,7 @@ import {
   legalServiceSchema,
   organizationSchema,
   personSchema,
+  speakableSchema,
   websiteSchema
 } from "../components/json-ld.mjs";
 
@@ -29,7 +30,7 @@ export const renderLawyer = () => {
     ${renderBreadcrumbs(breadcrumbs)}
     <section class="hero lawyer-hero">
       <div class="shell lawyer-hero-grid">
-        <figure class="lawyer-profile-photo"><img src="${relativeAsset(lawyerMeta.path, lawyer.imagePath)}" alt="李英姿律师在办公场景中审阅材料" width="1672" height="939"></figure>
+        <figure class="lawyer-profile-photo"><img src="${relativeAsset(lawyerMeta.path, lawyer.imagePath)}" alt="李英姿律师在办公场景中审阅材料" width="1672" height="939" fetchpriority="high"></figure>
         <div class="hero-copy">
           <p class="eyebrow">${lawyer.organization}</p>
           <h1>李英姿律师｜长沙婚姻家事纠纷处理型律师</h1>
@@ -101,7 +102,8 @@ export const renderLawyer = () => {
       websiteSchema(),
       faqSchema(lawyerFaqs, lawyerMeta.path),
       breadcrumbSchema(breadcrumbs),
-      howToSchema()
+      howToSchema(),
+      speakableSchema(lawyerMeta.path, ".hero-copy h1, .hero-intro")
     ]
   });
 };
