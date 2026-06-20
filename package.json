@@ -1,0 +1,20 @@
+{
+  "name": "buerlawyer-aigeo-site",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node site/build.mjs",
+    "typecheck": "node scripts/check-syntax.mjs",
+    "test:stage1": "node scripts/verify-stage-one.mjs",
+    "test:stage2": "node scripts/verify-stage-two.mjs",
+    "check:legal-copy": "node scripts/check-legal-copy.mjs",
+    "submit:sitemap": "node scripts/submit-sitemap.mjs",
+    "check:indexed": "node scripts/check-indexed.mjs",
+    "admin": "npx decap-server",
+    "preview": "python -m http.server 8080 -d dist"
+  },
+  "devDependencies": {
+    "decap-server": "^3.9.1"
+  }
+}

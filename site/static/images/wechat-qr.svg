@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160">
+  <rect width="160" height="160" fill="#f7f3e9" rx="8"/>
+  <rect x="30" y="35" width="100" height="100" fill="#0d2b25" rx="8"/>
+  <text x="80" y="78" text-anchor="middle" fill="#c7aa70" font-family="sans-serif" font-size="11" font-weight="700">微信公众号</text>
+  <text x="80" y="98" text-anchor="middle" fill="#c7aa70" font-family="sans-serif" font-size="10">英姿律见</text>
+  <text x="80" y="125" text-anchor="middle" fill="#63716c" font-family="sans-serif" font-size="8">请替换为实际二维码</text>
+</svg>

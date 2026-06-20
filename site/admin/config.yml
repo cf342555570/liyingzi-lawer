@@ -1,0 +1,79 @@
+backend:
+  name: proxy
+  proxy_url: http://localhost:8081/api/v1
+  branch: main
+  local_backend: true
+
+media_folder: "site/static/images"
+public_folder: "/assets/images"
+
+site_url: https://buerlawyer.com
+display_url: https://buerlawyer.com
+
+i18n:
+  structure: single_file
+  locales: [zh]
+  default_locale: zh
+
+collections:
+  - name: "articles"
+    label: "文章管理"
+    label_singular: "文章"
+    folder: "content/articles"
+    create: true
+    slug: "{{slug}}"
+    editor:
+      preview: false
+    fields:
+      - { label: "标题", name: "title", widget: "string" }
+      - { label: "描述", name: "description", widget: "text" }
+      - { label: "发布日期", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "分类", name: "category", widget: "select", options: ["离婚纠纷", "彩礼返还", "房产分割", "子女抚养", "协议审查", "共同债务", "赠与返还", "离婚谈判", "涉外婚姻", "实用指南"] }
+      - { label: "正文", name: "body", widget: "markdown" }
+    view_filters:
+      - { label: "离婚纠纷", field: "category", pattern: "离婚纠纷" }
+      - { label: "实用指南", field: "category", pattern: "实用指南" }
+
+  - name: "guides"
+    label: "指南管理"
+    label_singular: "指南"
+    folder: "content/guide"
+    create: true
+    slug: "{{slug}}"
+    editor:
+      preview: false
+    fields:
+      - { label: "标题", name: "title", widget: "string" }
+      - { label: "描述", name: "description", widget: "text" }
+      - { label: "发布日期", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "正文", name: "body", widget: "markdown" }
+
+  - name: "site_config"
+    label: "站点设置"
+    editor:
+      preview: false
+    files:
+      - label: "站点配置"
+        name: "site_config"
+        file: "site/data/site-config.json"
+        fields:
+          - { label: "联系电话", name: "phone", widget: "string" }
+          - { label: "公众号", name: "wechat", widget: "string", default: "英姿律见" }
+          - { label: "免责声明", name: "disclaimer", widget: "text" }
+          - { label: "Slogan提示", name: "sloganNotice", widget: "text" }
+
+  - name: "faqs"
+    label: "FAQ管理"
+    editor:
+      preview: false
+    files:
+      - label: "首页FAQ"
+        name: "home_faqs"
+        file: "site/data/home-faqs.json"
+        fields:
+          - label: "FAQ列表"
+            name: "faqs"
+            widget: "list"
+            fields:
+              - { label: "问题", name: "question", widget: "string" }
+              - { label: "回答", name: "answer", widget: "text" }

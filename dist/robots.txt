@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://buerlawyer.com/sitemap.xml
