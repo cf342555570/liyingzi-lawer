@@ -16,5 +16,8 @@
   },
   "devDependencies": {
     "decap-server": "^3.9.1"
+  },
+  "dependencies": {
+    "sharp": "^0.35.2"
   }
 }

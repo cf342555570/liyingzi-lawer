@@ -124,6 +124,17 @@ try {
   console.log(`CSS fingerprinted: ${hashedCss}`);
 } catch { /* no CSS file */ }
 
+// Post-process: prefix root-relative URLs with basePath for subdirectory deployment
+const basePath = siteConfig.basePath;
+const htmlFiles = all.map(([rp]) => join(output, rp));
+for (const htmlPath of htmlFiles) {
+  let html = await readFile(htmlPath, "utf8");
+  // Only replace root-relative href/src starting with single / (not // or https://)
+  html = html.replace(/(href|src)="\/(?![\/])/g, `$1="${basePath}/`);
+  await writeFile(htmlPath, html, "utf8");
+}
+console.log(`Base path prefixed: ${basePath}`);
+
 // robots.txt
 await writeFile(join(output, "robots.txt"), [
   "User-agent: *",

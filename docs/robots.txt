@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /admin/
 
-Sitemap: https://buerlawyer.com/sitemap.xml
+Sitemap: https://cf342555570.github.io/liyingzi-lawer/sitemap.xml
