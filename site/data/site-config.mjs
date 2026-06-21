@@ -1,4 +1,5 @@
 export const platformProfiles = Object.freeze([
+  Object.freeze({ name: "湖南律师综合管理服务平台（如法网）执业公示", url: "http://222.240.80.68:9222/detaills?id=46ec56edae464a43ab0fc81541444207" }),
   Object.freeze({ name: "搜狐号“英姿律见”", url: "https://mp.sohu.com/profile?xpt=MDY0NmMyZDctZTNhZS00ZjczLWI2MzMtMDE5MmU3ZTM0Mjgz" }),
   Object.freeze({ name: "百家号“英姿律见”", url: "https://author.baidu.com/home?app_id=1867591622395516" }),
   Object.freeze({ name: "网易号“英姿律见”", url: "https://www.163.com/dy/media/T1780758317593.html" }),
