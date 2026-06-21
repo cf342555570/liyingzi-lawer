@@ -22,8 +22,10 @@ export const siteConfig = Object.freeze({
     legalService: "https://cf342555570.github.io/liyingzi-lawer/#legalservice",
     website: "https://cf342555570.github.io/liyingzi-lawer/#website"
   }),
-  // TODO: 仅在归属已经核验后添加司法行政公示、律所官网和官方账号链接。
-  sameAs: Object.freeze([])
+  // 已由用户确认归属；其他平台仍须逐一核验后添加。
+  sameAs: Object.freeze([
+    "https://mp.sohu.com/profile?xpt=MDY0NmMyZDctZTNhZS00ZjczLWI2MzMtMDE5MmU3ZTM0Mjgz"
+  ])
 });
 
 export const absoluteUrl = (path = "/") => {

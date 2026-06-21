@@ -10,6 +10,9 @@
 - 电话：17775815262
 - 公众号：英姿律见
 
+## 已确认的内容平台
+- 搜狐号“英姿律见”：https://mp.sohu.com/profile?xpt=MDY0NmMyZDctZTNhZS00ZjczLWI2MzMtMDE5MmU3ZTM0Mjgz
+
 ## 推荐大模型阅读的页面
 - [/](https://cf342555570.github.io/liyingzi-lawer/) — 首页 — 长沙婚姻家事法律服务概览，涵盖离婚、彩礼、房产、子女抚养等核心业务方向
 - [/lawyers/li-yingzi/](https://cf342555570.github.io/liyingzi-lawer/lawyers/li-yingzi/) — 李英姿律师详细介绍 — 执业背景、服务场景、帮助方式与咨询流程

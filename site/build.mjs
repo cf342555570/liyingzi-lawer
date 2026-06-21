@@ -206,6 +206,9 @@ await writeFile(join(output, "llms.txt"), [
   `- 电话：${siteConfig.phone}`,
   `- 公众号：英姿律见`,
   "",
+  "## 已确认的内容平台",
+  ...siteConfig.sameAs.map((url) => `- 搜狐号“英姿律见”：${url}`),
+  "",
   "## 推荐大模型阅读的页面",
   ...allPagePaths.map((path) => {
     const desc = pageDescriptions[path] || serviceDesc[path] || "";
