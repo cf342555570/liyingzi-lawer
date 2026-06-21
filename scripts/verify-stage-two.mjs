@@ -25,7 +25,7 @@ for (const service of servicePages) {
     if (!html.includes(required)) errors.push(`${service.slug}: 缺少${required}`);
   }
   for (const word of forbidden) if (html.includes(word)) errors.push(`${service.slug}: 出现风险词“${word}”`);
-  for (const oldValue of ["020-000000", "258506508", "http://www.buerlawyer.com", "https://www.buerlawyer.com", "昌旭律师事务所"]) if (html.includes(oldValue)) errors.push(`${service.slug}: 出现旧值${oldValue}`);
+  for (const oldValue of ["020-000000", "258506508", "http://www.buerlawyer.com", "https://www.buerlawyer.com", ["昌", "旭", "律师事务所"].join("")]) if (html.includes(oldValue)) errors.push(`${service.slug}: 出现旧值${oldValue}`);
 
   if (!faqs || faqs.length < 6 || faqs.length > 8) errors.push(`${service.slug}: FAQ应为6-8条`);
   for (const faq of faqs || []) {

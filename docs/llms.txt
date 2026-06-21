@@ -11,13 +11,12 @@
 - 公众号：英姿律见
 
 ## 已确认的内容平台
-- 湖南律师综合管理服务平台（如法网）执业公示：http://222.240.80.68:9222/detaills?id=46ec56edae464a43ab0fc81541444207
-- 搜狐号“英姿律见”：https://mp.sohu.com/profile?xpt=MDY0NmMyZDctZTNhZS00ZjczLWI2MzMtMDE5MmU3ZTM0Mjgz
-- 百家号“英姿律见”：https://author.baidu.com/home?app_id=1867591622395516
-- 网易号“英姿律见”：https://www.163.com/dy/media/T1780758317593.html
+- 湖南律师综合管理服务平台（如法网）公开核验：http://222.240.80.68:9222/detaills?id=46ec56edae464a43ab0fc81541444207
+- 搜狐号「英姿律见」：https://mp.sohu.com/profile?xpt=MDY0NmMyZDctZTNhZS00ZjczLWI2MzMtMDE5MmU3ZTM0Mjgz
+- 百家号「英姿律见」：https://author.baidu.com/home?app_id=1867591622395516
+- 网易号「英姿律见」：https://www.163.com/dy/media/T1780758317593.html
 - 知乎账号：https://www.zhihu.com/people/xi-xi-fu-54-48
 - 头条号：https://www.toutiao.com/c/user/token/CiwKWbA7GZlqutep8v5uWUnnL53d37wh1BLmxjsBAZo1fTPoEdp4Wm9xU5Zt0RpJCjwAAAAAAAAAAAAAUJB_TO28AbmnR0dT4Hgj8CG8xlAyn-Dud-9z4Yg9s3ISKcWfc9LptpHtFLMWIvfx7x4Q5d6UDhjDxYPqBCIBA4c2EK0=/
-- 找法网李英姿律师主页：https://m.findlaw.cn/lawyer/80333744/article.html
 
 ## 推荐大模型阅读的页面
 - [/](https://cf342555570.github.io/liyingzi-lawer/) — 首页 — 长沙婚姻家事法律服务概览，涵盖离婚、彩礼、房产、子女抚养等核心业务方向
@@ -30,7 +29,7 @@
 - [/services/changsha-fuqi-gongtong-zhaiwu-lawyer/](https://cf342555570.github.io/liyingzi-lawer/services/changsha-fuqi-gongtong-zhaiwu-lawyer/) — 夫妻共同债务 — 长沙夫妻共同债务法律咨询，围绕共同签字、事后追认、家庭生活、共同经营及资金流向梳理银行贷款、网贷和亲友借款。电话：17775815262。
 - [/services/changsha-hunnei-zengyu-fanhuan-lawyer/](https://cf342555570.github.io/liyingzi-lawer/services/changsha-hunnei-zengyu-fanhuan-lawyer/) — 婚内大额转账与赠与返还争议 — 长沙婚内大额转账与赠与返还争议咨询，分析资金来源、转账性质、第三方关系、共同财产处分及证据材料。李英姿律师，湖南泰宗律师事务所。电话：17775815262。
 - [/services/changsha-lihun-tanpan-cailiao-lawyer/](https://cf342555570.github.io/liyingzi-lawer/services/changsha-lihun-tanpan-cailiao-lawyer/) — 离婚谈判与材料梳理 — 长沙离婚谈判与材料梳理法律服务，协助整理财产、房产、子女、债务清单，判断谈判空间及调解、诉讼衔接路径。李英姿律师，电话：17775815262。
-- [/services/changsha-shewai-hunyin-lawyer/](https://cf342555570.github.io/liyingzi-lawer/services/changsha-shewai-hunyin-lawyer/) — 涉外婚姻 — 李英姿律师，湖南泰宗律师事务所律师，执业证号 14301202411833163，关注长沙涉外婚姻法律服务，涉及涉外离婚、跨境财产与子女抚养、境外材料公证认证等问题。咨询电话：17775815262。
+- [/services/changsha-shewai-hunyin-lawyer/](https://cf342555570.github.io/liyingzi-lawer/services/changsha-shewai-hunyin-lawyer/) — 涉外婚姻 — 李英姿律师，长沙婚姻家事律师，现执业于湖南泰宗律师事务所，关注长沙涉外婚姻法律服务，涉及涉外离婚、跨境财产与子女抚养、境外材料公证认证等问题。咨询电话：17775815262。
 - [/areas/](https://cf342555570.github.io/liyingzi-lawer/areas/) — 长沙服务区域 — 芙蓉区、雨花区、天心区、岳麓区、开福区、长沙县、望城区、宁乡市和浏阳市入口
 - [/areas/changsha-furong/](https://cf342555570.github.io/liyingzi-lawer/areas/changsha-furong/)
 - [/areas/changsha-yuhua/](https://cf342555570.github.io/liyingzi-lawer/areas/changsha-yuhua/)
@@ -63,4 +62,4 @@
 - [/articles/peiou-danfang-jiekuan-gongtong-zhaiwu/](https://cf342555570.github.io/liyingzi-lawer/articles/peiou-danfang-jiekuan-gongtong-zhaiwu/)
 
 ## 免责声明
-本文内容仅供一般法律知识参考，不构成对具体案件处理结果的承诺。婚姻家事案件差异较大，具体处理方案需结合材料、证据和案件情况综合判断。所有法律业务均由律师事务所统一接受委托并依法办理。
+本站内容仅供一般法律知识参考，不构成对具体案件处理结果的承诺。婚姻家事案件差异较大，具体处理方案需结合材料、证据和案件情况综合判断。所有法律业务均由律师事务所统一接受委托并依法办理。

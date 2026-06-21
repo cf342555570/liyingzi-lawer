@@ -4,6 +4,15 @@ Allow: /
 User-agent: Bytespider
 Allow: /
 
+User-agent: PetalBot
+Allow: /
+
+User-agent: YisouSpider
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
 User-agent: GPTBot
 Allow: /
 

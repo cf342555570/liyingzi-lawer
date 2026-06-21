@@ -16,28 +16,47 @@ export const renderBreadcrumbs = (items) => `
     <ol>${items.map((item, index) => `<li>${index === items.length - 1 ? `<span aria-current="page">${escapeHtml(item.name)}</span>` : `<a href="${item.path}">${escapeHtml(item.name)}</a>`}</li>`).join("")}</ol>
   </nav>`;
 
-const header = `
+const navItems = Object.freeze([
+  ["首页", "/"],
+  ["律师介绍", "/lawyers/li-yingzi/"],
+  ["家事业务", "/#services"],
+  ["长沙区县服务", "/areas/"],
+  ["普法专栏", "/articles/"],
+  ["FAQ问答", "/faq/"],
+  ["资质核验", "/qualifications/"],
+  ["联系我们", "/contact/"]
+]);
+
+const isActive = (currentPath, href) => {
+  if (href === "/") return currentPath === "/";
+  if (href.includes("#")) return currentPath === href.split("#")[0];
+  return currentPath.startsWith(href);
+};
+
+const renderHeader = (currentPath) => `
   <header class="site-header">
-    <div class="credential-bar"><div class="shell credential-inner"><span>${siteConfig.organization}</span><span>执业证号 ${lawyer.licenseNumber}</span><span>长沙婚姻家事法律服务</span></div></div>
+    <div class="credential-bar">
+      <div class="shell credential-inner">
+        <span>${siteConfig.organization}</span>
+        <span>${lawyer.credentialLabel}</span>
+        <span>长沙婚姻家事法律服务</span>
+      </div>
+    </div>
     <div class="shell header-inner">
       <a class="brand" href="/" aria-label="英姿律见首页">
         <span class="brand-mark" aria-hidden="true">英姿</span>
-        <span><strong>${siteConfig.shortName}</strong><small>李英姿律师 · 婚姻家事</small></span>
+        <span><strong>${siteConfig.shortName}</strong><small>${lawyer.displayName} · 婚姻家事</small></span>
       </a>
-      <input type="checkbox" id="menu-toggle" class="menu-toggle" aria-hidden="true">
-      <label for="menu-toggle" class="hamburger" aria-label="菜单" tabindex="0" role="button">
+      <button class="hamburger" type="button" aria-label="打开导航菜单" aria-controls="mobile-nav-panel" aria-expanded="false">
         <span></span><span></span><span></span>
-      </label>
-      <label for="menu-toggle" class="mobile-nav-overlay" aria-hidden="true"></label>
-      <nav class="main-nav" aria-label="主导航">
-        <a href="/">首页</a>
-        <a href="/lawyers/li-yingzi/">关于李英姿</a>
-        <a href="/#services">服务方向</a>
-        <a href="/areas/">服务区域</a>
-        <a href="/articles/">普法文章</a>
-        <a href="/faq/">常见问题</a>
-        <a href="/materials/">材料清单</a>
-        <a href="/contact/">联系我</a>
+      </button>
+      <div class="mobile-nav-overlay" data-nav-close hidden></div>
+      <nav class="main-nav" id="mobile-nav-panel" aria-label="主导航">
+        <div class="mobile-nav-head">
+          <strong>${siteConfig.shortName}</strong>
+          <button class="mobile-nav-close" type="button" aria-label="关闭导航菜单" data-nav-close>×</button>
+        </div>
+        ${navItems.map(([label, href]) => `<a href="${href}"${isActive(currentPath, href) ? ` aria-current="page" class="active"` : ""}>${label}</a>`).join("")}
       </nav>
       <a class="phone-link" href="${siteConfig.phoneHref}" aria-label="拨打咨询电话 ${siteConfig.phone}">${siteConfig.phone}</a>
     </div>
@@ -46,28 +65,49 @@ const header = `
 const footer = `
   <footer class="site-footer">
     <div class="shell footer-grid">
-      <div><strong>${siteConfig.shortName}</strong><p>${lawyer.displayName}｜${siteConfig.organization}</p><p>执业证号：${lawyer.licenseNumber}</p><p>电话：<a href="${siteConfig.phoneHref}">${siteConfig.phone}</a></p><p>公众号：${lawyer.contentBrand}</p></div>
+      <div>
+        <strong>${siteConfig.shortName}</strong>
+        <p>${lawyer.displayName}｜${siteConfig.organization}</p>
+        <p>${lawyer.credentialLabel}</p>
+        <p>电话：<a href="${siteConfig.phoneHref}">${siteConfig.phone}</a></p>
+        <p>公众号：${lawyer.contentBrand}</p>
+      </div>
       <div class="footer-nav">
         <strong>浏览</strong>
         <nav aria-label="底部导航">
-          <a href="/">首页</a>
-          <a href="/lawyers/li-yingzi/">关于李英姿</a>
-          <a href="/#services">服务方向</a>
-          <a href="/areas/">服务区域</a>
-          <a href="/articles/">普法文章</a>
-          <a href="/qualifications/">资质核验</a>
-          <a href="/faq/">常见问题</a>
+          ${navItems.map(([label, href]) => `<a href="${href}">${label}</a>`).join("")}
           <a href="/materials/">材料清单</a>
-          <a href="/contact/">联系我</a>
           <a href="/privacy/">隐私说明</a>
         </nav>
       </div>
     </div>
     <div class="shell disclaimer" role="note" aria-label="法律信息免责声明">
-      <strong>免责声明</strong><p>${siteConfig.disclaimer}</p>
+      <strong>官方说明</strong><p>${siteConfig.footerOfficialText}</p>
     </div>
-    <div class="shell footer-bottom"><span>&copy; ${new Date().getFullYear()} ${siteConfig.shortName}</span><span>服务区域：${lawyer.serviceArea}</span></div>
+    <div class="shell footer-bottom"><span>${siteConfig.shortName}</span><span>服务区域：${lawyer.serviceArea}</span></div>
   </footer>`;
+
+const navScript = `
+  <script>
+    (() => {
+      const button = document.querySelector(".hamburger");
+      const panel = document.querySelector(".main-nav");
+      const overlay = document.querySelector(".mobile-nav-overlay");
+      const closeEls = document.querySelectorAll("[data-nav-close]");
+      if (!button || !panel || !overlay) return;
+      const setOpen = (open) => {
+        document.documentElement.classList.toggle("nav-open", open);
+        button.setAttribute("aria-expanded", String(open));
+        overlay.hidden = !open;
+      };
+      button.addEventListener("click", () => setOpen(!document.documentElement.classList.contains("nav-open")));
+      closeEls.forEach((el) => el.addEventListener("click", () => setOpen(false)));
+      panel.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => setOpen(false)));
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") setOpen(false);
+      });
+    })();
+  </script>`;
 
 export const renderLayout = ({ title, description, path, body, schemas = [], keywords = "", robots = "index, follow" }) => {
   const canonical = absoluteUrl(path);
@@ -91,23 +131,24 @@ export const renderLayout = ({ title, description, path, body, schemas = [], key
   <meta property="og:description" content="${escapeHtml(description)}">
   <meta property="og:url" content="${canonical}">
   <meta property="og:image" content="${ogImage}">
-  <meta property="og:image:alt" content="李英姿律师｜湖南泰宗律师事务所">
+  <meta property="og:image:alt" content="${escapeHtml(siteConfig.imageAlt)}">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="675">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${escapeHtml(title)}">
   <meta name="twitter:description" content="${escapeHtml(description)}">
   <meta name="twitter:image" content="${ogImage}">
-  <meta name="theme-color" content="#0a2923">
+  <meta name="theme-color" content="#ffffff">
   <link rel="icon" href="${faviconHref}" type="image/svg+xml">
   <link rel="stylesheet" href="${stylesheetHref}">
   ${renderJsonLd(schemas)}
 </head>
 <body>
   <a class="skip-link" href="#main">跳到主要内容</a>
-  ${header}
+  ${renderHeader(path)}
   <main id="main">${body}</main>
   ${footer}
+  ${navScript}
 </body>
 </html>`;
 };

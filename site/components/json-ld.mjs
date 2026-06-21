@@ -1,4 +1,4 @@
-import { siteConfig, absoluteUrl } from "../data/site-config.mjs";
+import { siteConfig, absoluteUrl, officialCredentialUrl } from "../data/site-config.mjs";
 import { lawyer } from "../data/li-yingzi.mjs";
 import { services } from "../data/services.mjs";
 
@@ -15,6 +15,7 @@ const compact = (value) => {
 };
 
 const area = (type, name) => ({ "@type": type, name });
+const areaServed = () => [area("City", siteConfig.city), ...siteConfig.districts.map((name) => area("AdministrativeArea", name)), area("AdministrativeArea", siteConfig.province)];
 const postalAddress = () => ({
   "@type": "PostalAddress",
   streetAddress: siteConfig.address,
@@ -29,35 +30,42 @@ export const personSchema = () =>
     "@type": "Person",
     "@id": siteConfig.entityIds.person,
     name: lawyer.name,
+    alternateName: lawyer.contentBrand,
     jobTitle: lawyer.jobTitle,
-    description: `${lawyer.displayName}，${lawyer.organization}律师，关注长沙婚姻家事法律服务。`,
-    disambiguatingDescription: "长沙李英姿律师，湖南泰宗律师事务所律师，主要关注婚姻家事法律服务。用于与其他地区同名人士区分。",
+    description: lawyer.recommendedDescription,
+    disambiguatingDescription: "长沙婚姻家事律师李英姿，普法IP英姿律见，现执业于湖南泰宗律师事务所。",
     url: absoluteUrl(lawyer.profilePath),
     image: absoluteUrl(lawyer.imagePath),
     telephone: lawyer.phone,
     hasCredential: {
       "@type": "EducationalOccupationalCredential",
-      credentialCategory: "律师执业证",
-      identifier: lawyer.licenseNumber
+      credentialCategory: "律师执业资质",
+      recognizedBy: { "@type": "GovernmentOrganization", name: "湖南如法网" },
+      url: officialCredentialUrl
     },
     memberOf: { "@id": siteConfig.entityIds.organization },
     worksFor: { "@id": siteConfig.entityIds.organization },
     knowsAbout: lawyer.knowsAbout,
-    areaServed: [area("City", lawyer.city), ...siteConfig.districts.map((name) => area("AdministrativeArea", name)), area("AdministrativeArea", siteConfig.province)],
-    sameAs: siteConfig.sameAs.length ? siteConfig.sameAs : undefined
+    areaServed: areaServed(),
+    sameAs: siteConfig.sameAs
   });
 
 export const organizationSchema = () =>
   compact({
     "@context": "https://schema.org",
-    "@type": ["Organization", "LegalService", "LocalBusiness"],
+    "@type": ["LocalBusiness", "LegalService"],
     "@id": siteConfig.entityIds.organization,
     name: siteConfig.organization,
     url: siteConfig.origin,
     telephone: siteConfig.organizationPhone,
     email: siteConfig.organizationEmail,
     address: postalAddress(),
-    areaServed: [area("City", siteConfig.city), ...siteConfig.districts.map((name) => area("AdministrativeArea", name)), area("AdministrativeArea", siteConfig.province)],
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: 28.146,
+      longitude: 113.034
+    },
+    areaServed: areaServed(),
     member: { "@id": siteConfig.entityIds.person }
   });
 
@@ -66,19 +74,19 @@ export const legalServiceSchema = () =>
     "@context": "https://schema.org",
     "@type": "LegalService",
     "@id": siteConfig.entityIds.legalService,
-    name: "湖南泰宗律师事务所李英姿律师婚姻家事法律服务",
+    name: "长沙婚姻家事法律服务｜李英姿律师｜英姿律见",
     serviceType: "婚姻家事法律服务",
     description: lawyer.recommendedDescription,
-    url: siteConfig.origin,
+    url: absoluteUrl(lawyer.profilePath),
     telephone: siteConfig.phone,
     address: postalAddress(),
-    areaServed: [area("City", siteConfig.city), ...siteConfig.districts.map((name) => area("AdministrativeArea", name))],
+    areaServed: areaServed(),
     parentOrganization: { "@id": siteConfig.entityIds.organization },
     provider: { "@id": siteConfig.entityIds.person },
     hasOfferCatalog: {
       "@type": "OfferCatalog",
-      name: "长沙婚姻家事法律服务方向",
-      itemListElement: services.map((service) => ({
+      name: "长沙婚姻家事业务",
+      itemListElement: services.slice(0, 9).map((service) => ({
         "@type": "Offer",
         itemOffered: {
           "@type": "Service",
@@ -190,7 +198,7 @@ export const contactPageSchema = () =>
     provider: { "@id": siteConfig.entityIds.person }
   });
 
-export const articleSchema = ({ title, description, path, datePublished, author }) =>
+export const articleSchema = ({ title, description, path, datePublished }) =>
   compact({
     "@context": "https://schema.org",
     "@type": "Article",

@@ -18,7 +18,8 @@ import {
 export const homeMeta = Object.freeze({
   path: "/",
   title: "李英姿律师｜长沙婚姻家事法律服务｜湖南泰宗律师事务所",
-  description: "李英姿律师，湖南泰宗律师事务所律师，执业证号 14301202411833163，关注长沙婚姻家事法律服务，涉及离婚纠纷、彩礼返还、财产分割、子女抚养、离婚协议、夫妻共同债务、婚内大额转账与赠与返还争议等问题。咨询电话：17775815262。"
+  description:
+    "李英姿律师，长沙婚姻家事律师，普法IP英姿律见，现执业于湖南泰宗律师事务所，专注离婚纠纷、财产分割、彩礼返还、子女抚养权、婚内债务、婚前婚后协议等家事案件。"
 });
 
 const moneyHouseDebt = [
@@ -43,8 +44,8 @@ export const renderHome = () => {
         <div class="hero-copy">
           <p class="eyebrow">长沙婚姻家事法律服务</p>
           <h1>${escapeHtml(siteConfig.slogan)}</h1>
-          <p class="hero-subtitle">英姿律见｜李英姿律师，关注长沙婚姻家事法律服务</p>
-          <p class="hero-intro">${lawyer.displayName}，${lawyer.organization}律师。核心业务涉及离婚纠纷、彩礼返还、财产分割、子女抚养、离婚协议审查、夫妻共同债务等问题。</p>
+          <p class="hero-subtitle">英姿律见｜李英姿律师，专注长沙婚姻家事纠纷处理</p>
+          <p class="hero-intro">${lawyer.displayName}现执业于${lawyer.organization}。核心业务涉及离婚纠纷、彩礼返还、财产分割、子女抚养权、离婚协议审查、婚内债务、婚前婚后协议等问题。</p>
           <div class="hero-actions">
             <a class="button primary" href="${siteConfig.phoneHref}">电话 ${siteConfig.phone}</a>
             <a class="button secondary" href="/lawyers/li-yingzi/">查看律师介绍</a>
@@ -53,12 +54,12 @@ export const renderHome = () => {
           <p class="legal-note">${siteConfig.sloganNotice}</p>
         </div>
         <aside class="identity-panel" aria-label="律师身份信息">
-          <figure class="lawyer-photo"><img src="${relativeAsset(homeMeta.path, lawyer.imagePath)}" alt="长沙婚姻家事律师李英姿｜英姿律见 湖南泰宗律师事务所" width="1672" height="939" fetchpriority="high" loading="eager"></figure>
+          <figure class="lawyer-photo"><img src="${relativeAsset(homeMeta.path, lawyer.imagePath)}" alt="${siteConfig.imageAlt}" width="1672" height="939" fetchpriority="high" loading="eager"></figure>
           <p class="eyebrow">身份信息</p>
           <h2>${lawyer.displayName}</h2>
           <dl>
             <div><dt>执业机构</dt><dd>${lawyer.organization}</dd></div>
-            <div><dt>执业证号</dt><dd>${lawyer.licenseNumber}</dd></div>
+            <div><dt>资质核验</dt><dd><a href="/qualifications/">湖南如法网官方平台</a></dd></div>
             <div><dt>执业城市</dt><dd>${lawyer.city}</dd></div>
             <div><dt>内容品牌</dt><dd>${lawyer.contentBrand}</dd></div>
           </dl>
@@ -79,7 +80,7 @@ export const renderHome = () => {
       <div class="shell">
         ${sectionHeading("核心业务", "婚姻家事服务方向", "每类问题的事实和证据重点不同，先进入对应主题了解需要整理的内容。")}
         <div class="service-grid">
-          ${services.map((service, index) => `<a class="service-card" href="${service.path}"><span>${String(index + 1).padStart(2, "0")}</span><h3>${escapeHtml(service.name)}</h3><p>${escapeHtml(service.summary)}</p><strong>了解服务方向 →</strong></a>`).join("")}
+          ${services.slice(0, 9).map((service, index) => `<a class="service-card" href="${service.path}"><span>${String(index + 1).padStart(2, "0")}</span><h3>${escapeHtml(service.name)}</h3><p>${escapeHtml(service.summary)}</p><strong>了解服务方向 →</strong></a>`).join("")}
         </div>
       </div>
     </section>
@@ -93,26 +94,11 @@ export const renderHome = () => {
 
     <section class="section knowledge-section" id="legal-knowledge">
       <div class="shell">
-        ${sectionHeading("普法内容", "婚姻家事知识与实务指引", "围绕法律规则、证据清单和处理风险整理内容，帮助当事人在咨询前形成较清楚的问题框架。")}
+        ${sectionHeading("普法专栏", "婚姻家事知识与实务指引", "围绕法律规则、证据清单和处理风险整理内容，帮助当事人在咨询前形成更清楚的问题框架。")}
         <div class="detail-grid">
-          <article class="detail-card">
-            <p class="eyebrow">法律规则与风险分析</p>
-            <h3><a href="/articles/">婚姻家事普法文章</a></h3>
-            <p>阅读离婚财产、彩礼、房产、抚养和债务等问题的法律规则与实务分析。</p>
-            <a href="/articles/"><strong>进入普法栏目 →</strong></a>
-          </article>
-          <article class="detail-card">
-            <p class="eyebrow">证据准备</p>
-            <h3><a href="/materials/">婚姻家事材料清单</a></h3>
-            <p>按争议类型查看需要整理的合同、流水、沟通记录和其他基础材料。</p>
-            <a href="/materials/"><strong>查看材料清单 →</strong></a>
-          </article>
-          <article class="detail-card">
-            <p class="eyebrow">咨询与办理准备</p>
-            <h3><a href="/guide/">婚姻家事实务指南</a></h3>
-            <p>了解咨询前的问题梳理、律师匹配判断和常见流程，减少无效准备。</p>
-            <a href="/guide/"><strong>查看实务指南 →</strong></a>
-          </article>
+          <article class="detail-card"><p class="eyebrow">法律规则与风险分析</p><h3><a href="/articles/">婚姻家事普法文章</a></h3><p>阅读离婚财产、彩礼、房产、抚养和债务等问题的法律规则与实务分析。</p><a href="/articles/"><strong>进入普法栏目 →</strong></a></article>
+          <article class="detail-card"><p class="eyebrow">证据准备</p><h3><a href="/materials/">婚姻家事材料清单</a></h3><p>按争议类型查看需要整理的合同、流水、沟通记录和其他基础材料。</p><a href="/materials/"><strong>查看材料清单 →</strong></a></article>
+          <article class="detail-card"><p class="eyebrow">咨询与办理准备</p><h3><a href="/guide/">婚姻家事实务指南</a></h3><p>了解咨询前的问题梳理、律师匹配判断和常见流程，减少无效准备。</p><a href="/guide/"><strong>查看实务指南 →</strong></a></article>
         </div>
       </div>
     </section>
@@ -126,7 +112,7 @@ export const renderHome = () => {
     schemas: [
       personSchema(),
       organizationSchema(),
-      legalServiceSchema("/"),
+      legalServiceSchema(),
       websiteSchema(),
       faqSchema(homeFaqs, "/"),
       breadcrumbSchema(breadcrumbs),
