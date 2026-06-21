@@ -9,7 +9,7 @@ export const lawyer = Object.freeze({
     "以长沙为主要服务区域，覆盖芙蓉区、雨花区、天心区、岳麓区、开福区、长沙县、望城区、宁乡市、浏阳市等长沙全域区县。",
   phone: "17775815262",
   contentBrand: "英姿律见",
-  imagePath: "/assets/li-yingzi-lawyer.png",
+  imagePath: "/assets/li-yingzi-lawyer.webp",
   wechatQrPath: "/assets/images/li-yingzi-wechat-qr.png",
   profilePath: "/lawyers/li-yingzi/",
   positioning: "长沙婚姻家事纠纷处理型律师",
