@@ -38,7 +38,7 @@ const renderHeader = (currentPath) => `
     <div class="credential-bar">
       <div class="shell credential-inner">
         <span>${siteConfig.organization}</span>
-        <span>${lawyer.credentialLabel}</span>
+        <span>${siteConfig.shortName}</span>
         <span>长沙婚姻家事法律服务</span>
       </div>
     </div>

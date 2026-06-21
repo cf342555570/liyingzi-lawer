@@ -3,7 +3,7 @@ export const lawyer = Object.freeze({
   displayName: "李英姿律师",
   jobTitle: "婚姻家事律师",
   organization: "湖南泰宗律师事务所",
-  credentialLabel: "执业资质可通过湖南如法网官方平台核验",
+  credentialLabel: "长沙婚姻家事法律服务",
   city: "长沙",
   serviceArea:
     "以长沙为主要服务区域，覆盖芙蓉区、雨花区、天心区、岳麓区、开福区、长沙县、望城区、宁乡市、浏阳市等长沙全域区县。",
