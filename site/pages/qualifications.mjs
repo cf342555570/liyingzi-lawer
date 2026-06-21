@@ -1,0 +1,34 @@
+import { siteConfig, relativeAsset } from "../data/site-config.mjs";
+import { lawyer } from "../data/li-yingzi.mjs";
+import { escapeHtml, renderBreadcrumbs, renderLayout } from "../components/layout.mjs";
+import { sectionHeading } from "../components/sections.mjs";
+import { breadcrumbSchema, legalServiceSchema, organizationSchema, personSchema, websiteSchema } from "../components/json-ld.mjs";
+
+export const qualificationsMeta = Object.freeze({
+  path: "/qualifications/",
+  title: "李英姿律师执业资质核验说明｜湖南泰宗律师事务所",
+  description: "李英姿律师现执业于湖南泰宗律师事务所。可通过湖南律师综合管理服务平台（如法网）公开页面核验姓名、执业状态、执业证号遮挡信息及执业机构。"
+});
+
+const officialUrl = "http://222.240.80.68:9222/detaills?id=46ec56edae464a43ab0fc81541444207";
+
+export const renderQualifications = () => {
+  const breadcrumbs = [{ name: "首页", path: "/" }, { name: "李英姿律师", path: lawyer.profilePath }, { name: "执业资质核验", path: qualificationsMeta.path }];
+  const body = `${renderBreadcrumbs(breadcrumbs)}
+    <section class="section"><div class="shell narrow">
+      <p class="eyebrow">执业信息核验</p><h1>李英姿律师执业资质核验说明</h1>
+      <p class="large-copy">${lawyer.displayName}现执业于${lawyer.organization}，执业证号为 ${lawyer.licenseNumber}。页面仅展示当前执业主体及公开核验路径。</p>
+      <p class="legal-note">第三方平台页面可能更新，核验时以司法行政公开平台当前展示内容为准。</p>
+      <div class="hero-actions"><a class="button primary" href="${officialUrl}" target="_blank" rel="noopener noreferrer">前往如法网官方公示</a><a class="button secondary" href="${lawyer.profilePath}">返回律师介绍</a></div>
+    </div></section>
+    <section class="section" style="padding-top:0"><div class="shell narrow">
+      ${sectionHeading("官方公示", "公开页面局部核验信息", "截图仅保留姓名、正常执业状态和执业证号遮挡信息；完整动态信息请点击官方链接查看。")}
+      <figure class="credential-proof"><img src="${relativeAsset(qualificationsMeta.path, "/assets/images/li-yingzi-rufawang-credential.png")}" alt="长沙婚姻家事律师李英姿｜英姿律见 湖南泰宗律师事务所" width="1928" height="817" loading="lazy"><figcaption>湖南律师综合管理服务平台公开页面局部信息。动态公示以官方页面为准。</figcaption></figure>
+    </div></section>
+    <section class="section"><div class="shell narrow">
+      ${sectionHeading("核验步骤", "怎样核对公开执业信息")}
+      <ol class="step-grid"><li><span>01</span><h3>打开公示页</h3><p>通过上方链接进入湖南律师综合管理服务平台公开页面。</p></li><li><span>02</span><h3>核对姓名</h3><p>确认公开页面显示律师姓名为李英姿。</p></li><li><span>03</span><h3>核对状态</h3><p>查看律师执业状态和执业证号遮挡信息。</p></li><li><span>04</span><h3>核对机构</h3><p>确认当前执业机构为湖南泰宗律师事务所。</p></li></ol>
+      <p class="legal-note">${siteConfig.disclaimer}</p>
+    </div></section>`;
+  return renderLayout({ ...qualificationsMeta, body, schemas: [personSchema(), organizationSchema(), legalServiceSchema(), websiteSchema(), breadcrumbSchema(breadcrumbs)] });
+};

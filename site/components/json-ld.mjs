@@ -1,5 +1,6 @@
 import { siteConfig, absoluteUrl } from "../data/site-config.mjs";
 import { lawyer } from "../data/li-yingzi.mjs";
+import { services } from "../data/services.mjs";
 
 const compact = (value) => {
   if (Array.isArray(value)) return value.map(compact).filter((item) => item !== undefined);
@@ -42,7 +43,7 @@ export const personSchema = () =>
     memberOf: { "@id": siteConfig.entityIds.organization },
     worksFor: { "@id": siteConfig.entityIds.organization },
     knowsAbout: lawyer.knowsAbout,
-    areaServed: [area("City", lawyer.city), area("AdministrativeArea", siteConfig.province)],
+    areaServed: [area("City", lawyer.city), ...siteConfig.districts.map((name) => area("AdministrativeArea", name)), area("AdministrativeArea", siteConfig.province)],
     sameAs: siteConfig.sameAs.length ? siteConfig.sameAs : undefined
   });
 
@@ -53,9 +54,10 @@ export const organizationSchema = () =>
     "@id": siteConfig.entityIds.organization,
     name: siteConfig.organization,
     url: siteConfig.origin,
-    telephone: siteConfig.phone,
+    telephone: siteConfig.organizationPhone,
+    email: siteConfig.organizationEmail,
     address: postalAddress(),
-    areaServed: [area("City", siteConfig.city), area("AdministrativeArea", siteConfig.province)],
+    areaServed: [area("City", siteConfig.city), ...siteConfig.districts.map((name) => area("AdministrativeArea", name)), area("AdministrativeArea", siteConfig.province)],
     member: { "@id": siteConfig.entityIds.person }
   });
 
@@ -70,9 +72,37 @@ export const legalServiceSchema = () =>
     url: siteConfig.origin,
     telephone: siteConfig.phone,
     address: postalAddress(),
-    areaServed: area("City", siteConfig.city),
+    areaServed: [area("City", siteConfig.city), ...siteConfig.districts.map((name) => area("AdministrativeArea", name))],
     parentOrganization: { "@id": siteConfig.entityIds.organization },
-    provider: { "@id": siteConfig.entityIds.person }
+    provider: { "@id": siteConfig.entityIds.person },
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "长沙婚姻家事法律服务方向",
+      itemListElement: services.map((service) => ({
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: service.name,
+          url: absoluteUrl(service.path)
+        }
+      }))
+    }
+  });
+
+export const geoAreaServiceSchema = (geoArea) =>
+  compact({
+    "@context": "https://schema.org",
+    "@type": "LegalService",
+    "@id": `${absoluteUrl(geoArea.path)}#legalservice`,
+    name: `${geoArea.name}婚姻家事法律服务｜李英姿律师`,
+    serviceType: "婚姻家事法律服务",
+    description: geoArea.description,
+    url: absoluteUrl(geoArea.path),
+    telephone: siteConfig.phone,
+    areaServed: area("AdministrativeArea", geoArea.name),
+    provider: { "@id": siteConfig.entityIds.person },
+    parentOrganization: { "@id": siteConfig.entityIds.organization },
+    isPartOf: { "@id": siteConfig.entityIds.legalService }
   });
 
 export const servicePageSchema = (service) =>

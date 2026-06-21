@@ -1,5 +1,19 @@
+User-agent: Baiduspider
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
 User-agent: *
 Allow: /
 Disallow: /admin/
+Disallow: /preview/
+Disallow: /test/
 
 Sitemap: https://cf342555570.github.io/liyingzi-lawer/sitemap.xml

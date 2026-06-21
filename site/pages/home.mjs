@@ -53,7 +53,7 @@ export const renderHome = () => {
           <p class="legal-note">${siteConfig.sloganNotice}</p>
         </div>
         <aside class="identity-panel" aria-label="律师身份信息">
-          <figure class="lawyer-photo"><img src="${relativeAsset(homeMeta.path, lawyer.imagePath)}" alt="李英姿律师在办公场景中审阅材料" width="1672" height="939" fetchpriority="high" loading="eager"></figure>
+          <figure class="lawyer-photo"><img src="${relativeAsset(homeMeta.path, lawyer.imagePath)}" alt="长沙婚姻家事律师李英姿｜英姿律见 湖南泰宗律师事务所" width="1672" height="939" fetchpriority="high" loading="eager"></figure>
           <p class="eyebrow">身份信息</p>
           <h2>${lawyer.displayName}</h2>
           <dl>

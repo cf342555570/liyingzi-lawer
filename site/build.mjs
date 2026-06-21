@@ -13,9 +13,13 @@ import { renderArticle } from "./pages/articles/gongsi-guquan-fenge.mjs";
 import { renderArticlesIndex } from "./pages/articles/index.mjs";
 import { renderGuide } from "./pages/guide/5-questions-before-hiring.mjs";
 import { renderGuideIndex } from "./pages/guide/index.mjs";
+import { renderAreasIndex } from "./pages/areas-index.mjs";
+import { renderQualifications } from "./pages/qualifications.mjs";
 import { servicePages } from "./data/service-pages.mjs";
 import { services } from "./data/services.mjs";
+import { geoAreas } from "./data/geo-areas.mjs";
 import { renderServicePage } from "./components/service-page-template.mjs";
+import { renderGeoAreaPage } from "./components/geo-area-template.mjs";
 import { parseFrontmatter, renderMdPage } from "./components/md-page.mjs";
 import { platformProfiles, siteConfig } from "./data/site-config.mjs";
 
@@ -26,7 +30,8 @@ const origin = siteConfig.origin;
 const pages = [
   ["index.html", renderHome()],
   [join("lawyers", "li-yingzi", "index.html"), renderLawyer()],
-  ...servicePages.map((service) => [join("services", service.slug, "index.html"), renderServicePage(service)])
+  ...servicePages.map((service) => [join("services", service.slug, "index.html"), renderServicePage(service)]),
+  ...geoAreas.map((area) => [join("areas", `changsha-${area.slug}`, "index.html"), renderGeoAreaPage(area)])
 ];
 
 const extraPages = [
@@ -35,6 +40,8 @@ const extraPages = [
   [join("contact", "index.html"), renderContactPage()],
   [join("materials", "index.html"), renderMaterials()],
   [join("faq", "index.html"), renderFaqCollection()],
+  [join("areas", "index.html"), renderAreasIndex()],
+  [join("qualifications", "index.html"), renderQualifications()],
   [join("articles", "gongsi-guquan-fenge", "index.html"), renderArticle()],
   [join("guide", "index.html"), renderGuideIndex()],
   [join("guide", "5-questions-before-hiring", "index.html"), renderGuide()]
@@ -44,6 +51,9 @@ const allPagePaths = [
   "/",
   "/lawyers/li-yingzi/",
   ...servicePages.map((s) => s.path),
+  "/areas/",
+  ...geoAreas.map((area) => area.path),
+  "/qualifications/",
   "/privacy/",
   "/contact/",
   "/materials/",
@@ -150,9 +160,23 @@ console.log(`Base path prefixed: ${basePath}`);
 
 // robots.txt
 await writeFile(join(output, "robots.txt"), [
+  "User-agent: Baiduspider",
+  "Allow: /",
+  "",
+  "User-agent: Bytespider",
+  "Allow: /",
+  "",
+  "User-agent: GPTBot",
+  "Allow: /",
+  "",
+  "User-agent: OAI-SearchBot",
+  "Allow: /",
+  "",
   "User-agent: *",
   "Allow: /",
   "Disallow: /admin/",
+  "Disallow: /preview/",
+  "Disallow: /test/",
   "",
   `Sitemap: ${origin}/sitemap.xml`
 ].join("\n") + "\n", "utf8");
@@ -185,6 +209,8 @@ const pageDescriptions = {
   "/materials/": "材料清单合集 — 离婚、彩礼、房产等案件所需材料汇总",
   "/contact/": "联系李英姿律师 — 电话、微信、律所地址与到访指引",
   "/privacy/": "隐私说明 — 信息收集与使用规则",
+  "/areas/": "长沙服务区域 — 芙蓉区、雨花区、天心区、岳麓区、开福区、长沙县、望城区、宁乡市和浏阳市入口",
+  "/qualifications/": "执业资质核验说明 — 如法网公开执业信息核验路径",
   "/articles/": "实务文章合集 — 婚姻家事法律分析文章索引",
   "/articles/gongsi-guquan-fenge/": "文章 — 公司股权在离婚中的分割问题",
   "/guide/": "实务指南合集 — 婚姻家事法律问题操作指南索引",

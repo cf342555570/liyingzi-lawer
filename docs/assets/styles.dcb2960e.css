@@ -180,6 +180,9 @@ p { color: var(--muted); }
 .address-card { grid-column: 1 / -1; }
 .map-container { margin: 0 0 3rem; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); box-shadow: var(--shadow); }
 .map-container iframe { display: block; width: 100%; border: 0; }
+.credential-proof { margin: 2rem 0; padding: 1rem; border: 1px solid #d9d4c9; border-radius: 8px; background: #fff; }
+.credential-proof img { display: block; width: 100%; height: auto; border-radius: 6px; }
+.credential-proof figcaption { margin-top: .75rem; color: #666; font-size: .875rem; }
 .map-placeholder { padding: clamp(28px, 5vw, 52px); background: linear-gradient(135deg, #f3eddf, #e5ede7); }
 .map-placeholder h2 { max-width: 760px; margin-bottom: 12px; color: var(--green-950); font-size: clamp(24px, 3vw, 36px); }
 .map-placeholder p:last-child { max-width: 720px; margin-bottom: 0; }

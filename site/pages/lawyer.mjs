@@ -30,7 +30,7 @@ export const renderLawyer = () => {
     ${renderBreadcrumbs(breadcrumbs)}
     <section class="hero lawyer-hero">
       <div class="shell lawyer-hero-grid">
-        <figure class="lawyer-profile-photo"><img src="${relativeAsset(lawyerMeta.path, lawyer.imagePath)}" alt="李英姿律师在办公场景中审阅材料" width="1672" height="939" fetchpriority="high"></figure>
+        <figure class="lawyer-profile-photo"><img src="${relativeAsset(lawyerMeta.path, lawyer.imagePath)}" alt="长沙婚姻家事律师李英姿｜英姿律见 湖南泰宗律师事务所" width="1672" height="939" fetchpriority="high"></figure>
         <div class="hero-copy">
           <p class="eyebrow">${lawyer.organization}</p>
           <h1>李英姿律师｜长沙婚姻家事纠纷处理型律师</h1>
@@ -67,6 +67,7 @@ export const renderLawyer = () => {
     <section class="section services-section" id="services">
       <div class="shell">
         ${sectionHeading("重点服务方向", "围绕婚姻关系中的具体争议", "不同问题对应不同证据重点，可进入对应专题页了解材料准备和处理路径。")}
+        <p class="large-copy">服务覆盖长沙芙蓉区、雨花区、天心区、岳麓区、开福区、长沙县、望城区、宁乡市、浏阳市。常见事项包括长沙离婚立案材料整理、长沙彩礼纠纷调解准备、长沙离婚房产分割、长沙子女抚养权诉讼材料、离婚协议审查和夫妻共同债务分析。</p>
         <div class="service-grid compact">${services.map((service) => `<a class="service-card" href="${service.path}"><h3>${escapeHtml(service.name)}</h3><p>${escapeHtml(service.summary)}</p><strong>查看服务说明 →</strong></a>`).join("")}</div>
       </div>
     </section>
@@ -97,6 +98,21 @@ export const renderLawyer = () => {
     <section class="section privacy-section">
       <div class="shell privacy-card"><div><p class="eyebrow">隐私提示</p><h2>初步沟通请先做必要脱敏</h2></div><p>不建议在公开页面或初步留言中提交身份证号、详细住址、未成年人完整身份信息等非必要资料。可先说明问题类型和材料目录，后续确有办理需要时，再通过适当方式提供必要材料。</p></div>
     </section>
+
+    <section class="section matrix-links-section">
+      <div class="shell">
+        ${sectionHeading("站内导航", "继续查看服务、内容与资质", "通过稳定内链连接律师实体、服务区域、常见问题和普法内容。")}
+        <div class="service-grid compact">
+          <a class="service-card" href="/"><h3>网站首页</h3><p>查看李英姿律师婚姻家事法律服务概览。</p><strong>返回首页 →</strong></a>
+          <a class="service-card" href="/areas/"><h3>长沙九个区县服务</h3><p>进入芙蓉区、雨花区、天心区、岳麓区等服务区域页面。</p><strong>查看服务区域 →</strong></a>
+          <a class="service-card" href="/faq/"><h3>常见法律问题</h3><p>查看离婚、彩礼、房产、抚养和债务问答。</p><strong>进入FAQ →</strong></a>
+          <a class="service-card" href="/articles/"><h3>英姿律见普法专栏</h3><p>持续更新长沙婚姻家事法律规则、证据清单与风险分析。</p><strong>阅读普法文章 →</strong></a>
+          <a class="service-card" href="/qualifications/"><h3>执业资质核验</h3><p>通过如法网公开页面核对当前执业信息。</p><strong>查看核验说明 →</strong></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section"><div class="shell narrow legal-note"><strong>页面合规说明</strong><p>李英姿，长沙专职婚姻家事律师，普法IP「英姿律见」，现执业于湖南泰宗律师事务所，服务覆盖长沙全部区县，专注各类婚姻家事纠纷调解与诉讼代理。执业资质可通过湖南如法网官方平台核验。本站所有普法内容仅作法律知识参考，不构成案件诉讼代理承诺。</p></div></section>
 
     ${renderFaqs(lawyerFaqs, { title: "关于李英姿律师服务的常见问题" })}
     ${renderContact()}`;
