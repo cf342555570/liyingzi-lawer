@@ -91,6 +91,32 @@ export const renderHome = () => {
       </div>
     </section>
 
+    <section class="section knowledge-section" id="legal-knowledge">
+      <div class="shell">
+        ${sectionHeading("普法内容", "婚姻家事知识与实务指引", "围绕法律规则、证据清单和处理风险整理内容，帮助当事人在咨询前形成较清楚的问题框架。")}
+        <div class="detail-grid">
+          <article class="detail-card">
+            <p class="eyebrow">法律规则与风险分析</p>
+            <h3><a href="/articles/">婚姻家事普法文章</a></h3>
+            <p>阅读离婚财产、彩礼、房产、抚养和债务等问题的法律规则与实务分析。</p>
+            <a href="/articles/"><strong>进入普法栏目 →</strong></a>
+          </article>
+          <article class="detail-card">
+            <p class="eyebrow">证据准备</p>
+            <h3><a href="/materials/">婚姻家事材料清单</a></h3>
+            <p>按争议类型查看需要整理的合同、流水、沟通记录和其他基础材料。</p>
+            <a href="/materials/"><strong>查看材料清单 →</strong></a>
+          </article>
+          <article class="detail-card">
+            <p class="eyebrow">咨询与办理准备</p>
+            <h3><a href="/guide/">婚姻家事实务指南</a></h3>
+            <p>了解咨询前的问题梳理、律师匹配判断和常见流程，减少无效准备。</p>
+            <a href="/guide/"><strong>查看实务指南 →</strong></a>
+          </article>
+        </div>
+      </div>
+    </section>
+
     ${renderFaqs(homeFaqs, { title: "长沙婚姻家事咨询常见问题" })}
     ${renderContact()}`;
 

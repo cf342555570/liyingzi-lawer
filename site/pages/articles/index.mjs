@@ -9,20 +9,20 @@ const articleList = [gongsiArticle];
 
 export const articlesIndexMeta = Object.freeze({
   path: "/articles/",
-  title: "婚姻家事实务文章｜长沙律师分析｜英姿律见",
-  description: "李英姿律师（湖南泰宗律师事务所）关于长沙婚姻家事法律问题的实务分析文章，涵盖离婚财产分割、子女抚养、彩礼返还等方向。咨询电话：17775815262。",
+  title: "婚姻家事普法文章｜法律规则与风险分析｜英姿律见",
+  description: "英姿律见婚姻家事普法栏目，由李英姿律师围绕离婚财产分割、子女抚养、彩礼返还、夫妻共同债务等问题整理法律规则、证据要点与风险分析。",
   keywords: "长沙婚姻家事律师, 离婚财产分割, 子女抚养, 法律分析, 李英姿律师"
 });
 
 export const renderArticlesIndex = () => {
   const breadcrumbs = [
     { name: "首页", path: "/" },
-    { name: "实务文章", path: "/articles/" }
+    { name: "普法文章", path: "/articles/" }
   ];
 
   const articlesHtml = articleList.map((article) => `
     <article class="detail-card">
-      <p class="eyebrow">婚姻家事实务分析</p>
+      <p class="eyebrow">婚姻家事普法</p>
       <h2><a href="${article.path}">${escapeHtml(article.title)}</a></h2>
       <p>${escapeHtml(article.description)}</p>
       <a href="${article.path}"><strong>阅读全文 →</strong></a>
@@ -32,8 +32,8 @@ export const renderArticlesIndex = () => {
     ${renderBreadcrumbs(breadcrumbs)}
     <section class="section">
       <div class="shell narrow">
-        <h1>婚姻家事实务文章</h1>
-        <p class="large-copy">${lawyer.displayName}（${lawyer.organization}）关于长沙婚姻家事法律问题的实务分析与处理思路，供当事人在咨询前初步了解相关法律知识。</p>
+        <h1>婚姻家事普法文章</h1>
+        <p class="large-copy">英姿律见普法栏目由${lawyer.displayName}（${lawyer.organization}）围绕婚姻家事法律规则、证据准备与常见处理风险整理。内容用于一般法律知识参考，不能替代针对具体案件的材料审查。</p>
         <p class="legal-note">${siteConfig.sloganNotice}</p>
       </div>
     </section>
