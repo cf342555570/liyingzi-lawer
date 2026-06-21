@@ -7,7 +7,8 @@ import { articleSchema, breadcrumbSchema, howToSchema, legalServiceSchema, organ
 export const articleMeta = Object.freeze({
   path: "/articles/gongsi-guquan-fenge/",
   title: "离婚时公司股权如何分割？长沙婚姻家事律师分析｜英姿律见",
-  description: "离婚涉及公司股权时，需要区分婚前持股还是婚后取得、是否参与经营、其他股东意见等因素。李英姿律师，湖南泰宗律师事务所，结合婚姻家事方向分析处理思路。电话：17775815262。"
+  description: "离婚涉及公司股权时，需要区分婚前持股还是婚后取得、是否参与经营、其他股东意见等因素。李英姿律师，湖南泰宗律师事务所，结合婚姻家事方向分析处理思路。电话：17775815262。",
+  date: "2026-06-20"
 });
 
 export const renderArticle = () => {

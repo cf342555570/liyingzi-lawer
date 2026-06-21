@@ -5,8 +5,6 @@ import { sectionHeading } from "../../components/sections.mjs";
 import { articleMeta as gongsiArticle } from "./gongsi-guquan-fenge.mjs";
 import { breadcrumbSchema, howToSchema, legalServiceSchema, organizationSchema, personSchema, websiteSchema } from "../../components/json-ld.mjs";
 
-const articleList = [gongsiArticle];
-
 export const articlesIndexMeta = Object.freeze({
   path: "/articles/",
   title: "婚姻家事普法文章｜法律规则与风险分析｜英姿律见",
@@ -14,7 +12,9 @@ export const articlesIndexMeta = Object.freeze({
   keywords: "长沙婚姻家事律师, 离婚财产分割, 子女抚养, 法律分析, 李英姿律师"
 });
 
-export const renderArticlesIndex = () => {
+export const renderArticlesIndex = (additionalArticles = []) => {
+  const articleList = [gongsiArticle, ...additionalArticles]
+    .sort((a, b) => String(b.date || b.datePublished || "").localeCompare(String(a.date || a.datePublished || "")));
   const breadcrumbs = [
     { name: "首页", path: "/" },
     { name: "普法文章", path: "/articles/" }
@@ -25,6 +25,7 @@ export const renderArticlesIndex = () => {
       <p class="eyebrow">婚姻家事普法</p>
       <h2><a href="${article.path}">${escapeHtml(article.title)}</a></h2>
       <p>${escapeHtml(article.description)}</p>
+      ${article.date ? `<p style="font-size:0.875rem;color:#666;">发布：${escapeHtml(article.date)}</p>` : ""}
       <a href="${article.path}"><strong>阅读全文 →</strong></a>
     </article>`).join("");
 

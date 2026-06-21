@@ -7,7 +7,7 @@ import { renderContact } from "./sections.mjs";
 import { articleSchema, breadcrumbSchema, howToSchema, legalServiceSchema, organizationSchema, personSchema, websiteSchema } from "./json-ld.mjs";
 import { renderMarkdown } from "./markdown.mjs";
 
-const parseFrontmatter = (content) => {
+export const parseFrontmatter = (content) => {
   const match = content.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
   if (!match) return { body: content };
   const front = {};

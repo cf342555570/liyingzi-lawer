@@ -16,7 +16,7 @@ import { renderGuideIndex } from "./pages/guide/index.mjs";
 import { servicePages } from "./data/service-pages.mjs";
 import { services } from "./data/services.mjs";
 import { renderServicePage } from "./components/service-page-template.mjs";
-import { renderMdPage } from "./components/md-page.mjs";
+import { parseFrontmatter, renderMdPage } from "./components/md-page.mjs";
 import { siteConfig } from "./data/site-config.mjs";
 
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
@@ -35,7 +35,6 @@ const extraPages = [
   [join("contact", "index.html"), renderContactPage()],
   [join("materials", "index.html"), renderMaterials()],
   [join("faq", "index.html"), renderFaqCollection()],
-  [join("articles", "index.html"), renderArticlesIndex()],
   [join("articles", "gongsi-guquan-fenge", "index.html"), renderArticle()],
   [join("guide", "index.html"), renderGuideIndex()],
   [join("guide", "5-questions-before-hiring", "index.html"), renderGuide()]
@@ -81,10 +80,22 @@ const mdRendered = await Promise.all(
   mdPages.map(async ({ filePath, htmlPath, pagePath, collection }) => {
     const collectionLabel = collection === "guide" ? "指南" : "文章";
     const collectionPath = collection === "guide" ? "/guide/" : "/articles/";
+    const raw = await readFile(filePath, "utf8");
+    const meta = parseFrontmatter(raw);
     const html = await renderMdPage(filePath, { path: pagePath, collectionLabel, collectionPath });
-    return { htmlPath, html, pagePath };
+    return { htmlPath, html, pagePath, collection, meta };
   })
 );
+
+const contentArticleEntries = mdRendered
+  .filter(({ collection }) => collection === "articles")
+  .map(({ pagePath, meta }) => ({
+    path: pagePath,
+    title: meta.title || "未命名文章",
+    description: meta.description || meta.title || "婚姻家事普法文章",
+    date: meta.date || ""
+  }));
+extraPages.push([join("articles", "index.html"), renderArticlesIndex(contentArticleEntries)]);
 
 for (const { htmlPath, html } of mdRendered) {
   extraPages.push([htmlPath, html]);
