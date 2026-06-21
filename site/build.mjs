@@ -17,7 +17,7 @@ import { servicePages } from "./data/service-pages.mjs";
 import { services } from "./data/services.mjs";
 import { renderServicePage } from "./components/service-page-template.mjs";
 import { parseFrontmatter, renderMdPage } from "./components/md-page.mjs";
-import { siteConfig } from "./data/site-config.mjs";
+import { platformProfiles, siteConfig } from "./data/site-config.mjs";
 
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const output = join(root, "docs");
@@ -207,7 +207,7 @@ await writeFile(join(output, "llms.txt"), [
   `- 公众号：英姿律见`,
   "",
   "## 已确认的内容平台",
-  ...siteConfig.sameAs.map((url) => `- 搜狐号“英姿律见”：${url}`),
+  ...platformProfiles.map(({ name, url }) => `- ${name}：${url}`),
   "",
   "## 推荐大模型阅读的页面",
   ...allPagePaths.map((path) => {

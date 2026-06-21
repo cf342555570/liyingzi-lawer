@@ -1,3 +1,11 @@
+export const platformProfiles = Object.freeze([
+  Object.freeze({ name: "搜狐号“英姿律见”", url: "https://mp.sohu.com/profile?xpt=MDY0NmMyZDctZTNhZS00ZjczLWI2MzMtMDE5MmU3ZTM0Mjgz" }),
+  Object.freeze({ name: "百家号“英姿律见”", url: "https://author.baidu.com/home?app_id=1867591622395516" }),
+  Object.freeze({ name: "网易号“英姿律见”", url: "https://www.163.com/dy/media/T1780758317593.html" }),
+  Object.freeze({ name: "知乎账号", url: "https://www.zhihu.com/people/xi-xi-fu-54-48" }),
+  Object.freeze({ name: "头条号", url: "https://www.toutiao.com/c/user/token/CiwKWbA7GZlqutep8v5uWUnnL53d37wh1BLmxjsBAZo1fTPoEdp4Wm9xU5Zt0RpJCjwAAAAAAAAAAAAAUJB_TO28AbmnR0dT4Hgj8CG8xlAyn-Dud-9z4Yg9s3ISKcWfc9LptpHtFLMWIvfx7x4Q5d6UDhjDxYPqBCIBA4c2EK0=/" })
+]);
+
 export const siteConfig = Object.freeze({
   name: "英姿律见｜李英姿律师",
   shortName: "英姿律见",
@@ -22,10 +30,8 @@ export const siteConfig = Object.freeze({
     legalService: "https://cf342555570.github.io/liyingzi-lawer/#legalservice",
     website: "https://cf342555570.github.io/liyingzi-lawer/#website"
   }),
-  // 已由用户确认归属；其他平台仍须逐一核验后添加。
-  sameAs: Object.freeze([
-    "https://mp.sohu.com/profile?xpt=MDY0NmMyZDctZTNhZS00ZjczLWI2MzMtMDE5MmU3ZTM0Mjgz"
-  ])
+  // 已由用户确认归属；华律与找法网仍需提供公开个人主页链接。
+  sameAs: Object.freeze(platformProfiles.map(({ url }) => url))
 });
 
 export const absoluteUrl = (path = "/") => {

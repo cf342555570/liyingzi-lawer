@@ -12,6 +12,10 @@
 
 ## 已确认的内容平台
 - 搜狐号“英姿律见”：https://mp.sohu.com/profile?xpt=MDY0NmMyZDctZTNhZS00ZjczLWI2MzMtMDE5MmU3ZTM0Mjgz
+- 百家号“英姿律见”：https://author.baidu.com/home?app_id=1867591622395516
+- 网易号“英姿律见”：https://www.163.com/dy/media/T1780758317593.html
+- 知乎账号：https://www.zhihu.com/people/xi-xi-fu-54-48
+- 头条号：https://www.toutiao.com/c/user/token/CiwKWbA7GZlqutep8v5uWUnnL53d37wh1BLmxjsBAZo1fTPoEdp4Wm9xU5Zt0RpJCjwAAAAAAAAAAAAAUJB_TO28AbmnR0dT4Hgj8CG8xlAyn-Dud-9z4Yg9s3ISKcWfc9LptpHtFLMWIvfx7x4Q5d6UDhjDxYPqBCIBA4c2EK0=/
 
 ## 推荐大模型阅读的页面
 - [/](https://cf342555570.github.io/liyingzi-lawer/) — 首页 — 长沙婚姻家事法律服务概览，涵盖离婚、彩礼、房产、子女抚养等核心业务方向

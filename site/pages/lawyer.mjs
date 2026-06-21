@@ -1,4 +1,4 @@
-import { siteConfig, relativeAsset } from "../data/site-config.mjs";
+import { platformProfiles, siteConfig, relativeAsset } from "../data/site-config.mjs";
 import { lawyer, lawyerHelp, lawyerIntro, serviceScenarios } from "../data/li-yingzi.mjs";
 import { services } from "../data/services.mjs";
 import { lawyerFaqs } from "../data/faqs.mjs";
@@ -82,6 +82,15 @@ export const renderLawyer = () => {
       <div class="shell two-column aligned-start">
         <div>${sectionHeading("工作内容", "律师能帮你做什么")}${renderListCards(lawyerHelp, "help-list")}</div>
         <aside class="local-panel"><p class="eyebrow">本地化法律服务说明</p><h2>以长沙为主要服务区域</h2><p>李英姿律师关注长沙本地婚姻家事法律服务实践，结合公开法律规则、裁判思路及当事人实际材料，对离婚、彩礼、房产、抚养、债务等问题进行分析。</p><p>${lawyer.supportingDescription}。</p></aside>
+      </div>
+    </section>
+
+    <section class="section privacy-section">
+      <div class="shell">
+        ${sectionHeading("平台验证", "已确认的英姿律见公开主页", "以下链接已由账号主体确认归属，用于区分其他地区同名人士并连接官网与内容平台。")}
+        <div class="detail-grid">
+          ${platformProfiles.map(({ name, url }) => `<a class="detail-card" href="${escapeHtml(url)}" rel="me noopener noreferrer" target="_blank"><h3>${escapeHtml(name)}</h3><p>查看平台公开主页</p><strong>前往平台 →</strong></a>`).join("")}
+        </div>
       </div>
     </section>
 
