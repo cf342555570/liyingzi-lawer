@@ -28,6 +28,7 @@ export const renderNotFound = () => {
 
   return renderLayout({
     ...notFoundMeta,
+    robots: "noindex, follow",
     body,
     schemas: [personSchema(), organizationSchema(), legalServiceSchema(), websiteSchema(), breadcrumbSchema(breadcrumbs)]
   });

@@ -11,9 +11,8 @@ export const faqCollectionMeta = Object.freeze({
   description: "长沙婚姻家事法律服务常见问题合集，涵盖离婚、彩礼、房产、抚养、协议、债务、赠与返还、谈判和涉外婚姻等方向。咨询电话：17775815262。"
 });
 
-const allFaqs = [];
-
 export const renderFaqCollection = () => {
+  const allFaqs = [];
   const breadcrumbs = [{ name: "首页", path: "/" }, { name: "常见问题合集", path: "/faq/" }];
 
   const sections = services.map((service) => {
@@ -71,7 +70,7 @@ export const renderFaqCollection = () => {
       organizationSchema(),
       legalServiceSchema(),
       websiteSchema(),
-      faqSchema(allFaqs.slice(0, 30), "/faq/"),
+      faqSchema(allFaqs, "/faq/"),
       breadcrumbSchema(breadcrumbs),
       howToSchema()
     ]

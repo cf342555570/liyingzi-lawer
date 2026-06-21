@@ -26,8 +26,10 @@ export const siteConfig = Object.freeze({
   sameAs: Object.freeze([])
 });
 
-export const absoluteUrl = (path = "/") =>
-  new URL(path, `${siteConfig.origin}/`).toString();
+export const absoluteUrl = (path = "/") => {
+  const normalizedPath = path.startsWith("/") ? path : `/${path}`;
+  return `${siteConfig.origin}${normalizedPath}`;
+};
 
 export const sitePath = (path) => `${siteConfig.basePath}${path}`;
 

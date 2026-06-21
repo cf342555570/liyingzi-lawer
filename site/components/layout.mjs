@@ -64,7 +64,7 @@ const footer = `
     <div class="shell footer-bottom"><span>&copy; ${new Date().getFullYear()} ${siteConfig.shortName}</span><span>服务区域：${lawyer.serviceArea}</span></div>
   </footer>`;
 
-export const renderLayout = ({ title, description, path, body, schemas = [], keywords = "" }) => {
+export const renderLayout = ({ title, description, path, body, schemas = [], keywords = "", robots = "index, follow" }) => {
   const canonical = absoluteUrl(path);
   const faviconHref = relativeAsset(path, "/assets/favicon.svg");
   const stylesheetHref = relativeAsset(path, "/assets/styles.css");
@@ -77,7 +77,7 @@ export const renderLayout = ({ title, description, path, body, schemas = [], key
   <title>${escapeHtml(title)}</title>
   <meta name="description" content="${escapeHtml(description)}">
   ${keywords ? `<meta name="keywords" content="${escapeHtml(keywords)}">` : ""}
-  <meta name="robots" content="index, follow">
+  <meta name="robots" content="${escapeHtml(robots)}">
   <link rel="canonical" href="${canonical}">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="zh_CN">
@@ -88,7 +88,7 @@ export const renderLayout = ({ title, description, path, body, schemas = [], key
   <meta property="og:image" content="${ogImage}">
   <meta property="og:image:alt" content="李英姿律师｜湖南泰宗律师事务所">
   <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
+  <meta property="og:image:height" content="675">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${escapeHtml(title)}">
   <meta name="twitter:description" content="${escapeHtml(description)}">

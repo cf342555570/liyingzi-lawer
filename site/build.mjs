@@ -88,7 +88,9 @@ const mdRendered = await Promise.all(
 
 for (const { htmlPath, html } of mdRendered) {
   extraPages.push([htmlPath, html]);
-  allPagePaths.push(html.pagePath);
+}
+for (const { pagePath } of mdRendered) {
+  allPagePaths.push(pagePath);
 }
 
 await rm(output, { recursive: true, force: true });

@@ -2,6 +2,7 @@ import { readFile, stat } from "node:fs/promises";
 import { join } from "node:path";
 import { servicePages } from "../site/data/service-pages.mjs";
 import { serviceFaqs } from "../site/data/service-faqs.mjs";
+import { absoluteUrl } from "../site/data/site-config.mjs";
 
 const errors = [];
 const titles = new Set();
@@ -12,14 +13,14 @@ if (servicePages.length < 8) errors.push(`服务页数量不足：${servicePages
 
 for (const service of servicePages) {
   const faqs = serviceFaqs[service.slug];
-  const file = join("dist", "services", service.slug, "index.html");
+  const file = join("docs", "services", service.slug, "index.html");
   let html = "";
   try { html = await readFile(file, "utf8"); } catch { errors.push(`缺少页面：${file}`); continue; }
 
   if (titles.has(service.title)) errors.push(`title重复：${service.title}`);
   titles.add(service.title);
   if (!html.includes(`<h1>${service.h1}</h1>`)) errors.push(`${service.slug}: H1不匹配`);
-  if (!html.includes(`<link rel="canonical" href="https://buerlawyer.com${service.path}">`)) errors.push(`${service.slug}: canonical错误`);
+  if (!html.includes(`<link rel="canonical" href="${absoluteUrl(service.path)}">`)) errors.push(`${service.slug}: canonical错误`);
   for (const required of ["og:title", "og:description", "og:url", "17775815262", "湖南泰宗律师事务所", "英姿律见", "本文内容仅供一般法律知识参考"]) {
     if (!html.includes(required)) errors.push(`${service.slug}: 缺少${required}`);
   }
@@ -42,13 +43,13 @@ for (const service of servicePages) {
   contentSignatures.faqs.add(faqSignature);
 
   const blocks = [...html.matchAll(/<script type="application\/ld\+json">(.*?)<\/script>/gs)].map((match) => JSON.parse(match[1]));
-  const pageService = blocks.find((schema) => schema["@id"] === `https://buerlawyer.com${service.path}#service`);
+  const pageService = blocks.find((schema) => schema["@id"] === `${absoluteUrl(service.path)}#service`);
   if (!pageService) errors.push(`${service.slug}: 缺少独立LegalService JSON-LD`);
   const faqSchema = blocks.find((schema) => schema["@type"] === "FAQPage");
   if (JSON.stringify(faqSchema?.mainEntity?.map((item) => [item.name, item.acceptedAnswer.text])) !== JSON.stringify(faqs.map((item) => [item.question, item.answer]))) errors.push(`${service.slug}: FAQPage JSON-LD不一致`);
 
   for (const relatedSlug of service.related) {
-    try { await stat(join("dist", "services", relatedSlug, "index.html")); } catch { errors.push(`${service.slug}: 相关推荐链接不存在：${relatedSlug}`); }
+    try { await stat(join("docs", "services", relatedSlug, "index.html")); } catch { errors.push(`${service.slug}: 相关推荐链接不存在：${relatedSlug}`); }
   }
 }
 

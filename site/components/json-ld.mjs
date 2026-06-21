@@ -30,6 +30,7 @@ export const personSchema = () =>
     name: lawyer.name,
     jobTitle: lawyer.jobTitle,
     description: `${lawyer.displayName}，${lawyer.organization}律师，关注长沙婚姻家事法律服务。`,
+    disambiguatingDescription: "长沙李英姿律师，湖南泰宗律师事务所律师，主要关注婚姻家事法律服务。用于与其他地区同名人士区分。",
     url: absoluteUrl(lawyer.profilePath),
     image: absoluteUrl(lawyer.imagePath),
     telephone: lawyer.phone,
@@ -48,20 +49,14 @@ export const personSchema = () =>
 export const organizationSchema = () =>
   compact({
     "@context": "https://schema.org",
-    "@type": ["Organization", "LegalService"],
+    "@type": ["Organization", "LegalService", "LocalBusiness"],
     "@id": siteConfig.entityIds.organization,
     name: siteConfig.organization,
     url: siteConfig.origin,
     telephone: siteConfig.phone,
     address: postalAddress(),
     areaServed: [area("City", siteConfig.city), area("AdministrativeArea", siteConfig.province)],
-    member: { "@id": siteConfig.entityIds.person },
-    openingHoursSpecification: {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-      opens: "09:00",
-      closes: "18:00"
-    }
+    member: { "@id": siteConfig.entityIds.person }
   });
 
 export const legalServiceSchema = () =>
@@ -77,14 +72,7 @@ export const legalServiceSchema = () =>
     address: postalAddress(),
     areaServed: area("City", siteConfig.city),
     parentOrganization: { "@id": siteConfig.entityIds.organization },
-    provider: { "@id": siteConfig.entityIds.person },
-    priceRange: "¥¥",
-    openingHoursSpecification: {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-      opens: "09:00",
-      closes: "18:00"
-    }
+    provider: { "@id": siteConfig.entityIds.person }
   });
 
 export const servicePageSchema = (service) =>

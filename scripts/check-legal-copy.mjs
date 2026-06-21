@@ -58,15 +58,17 @@ const scanFile = (filePath, content) => {
 
 const sourceFiles = [
   ...await collectFiles("site", ".mjs"),
+  ...await collectFiles("site", ".yml"),
+  ...await collectFiles("content", ".md").catch(() => []),
   ...await collectFiles("scripts", ".mjs").then((files) =>
     files.filter((f) => !excludedScripts.some((ex) => f.endsWith(ex)))
   )
 ];
 
 const distFiles = [
-  ...(await collectFiles("dist", ".html").catch(() => [])),
-  ...(await collectFiles("dist", ".xml").catch(() => [])),
-  ...(await collectFiles("dist", ".txt").catch(() => []))
+  ...(await collectFiles("docs", ".html").catch(() => [])),
+  ...(await collectFiles("docs", ".xml").catch(() => [])),
+  ...(await collectFiles("docs", ".txt").catch(() => []))
 ];
 
 let allFindings = [];
