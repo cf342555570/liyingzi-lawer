@@ -184,6 +184,50 @@ export const howToSchema = () => ({
   }))
 });
 
+export const servicePathHowToSchemas = () => [
+  {
+    id: "agreement-review-howto",
+    name: "离婚协议审查的一般流程",
+    steps: [
+      ["核对基础信息", "核对协议主体、婚姻状态、子女信息和财产债务基本情况。"],
+      ["审查核心条款", "审查房产、债务、抚养、探望、补偿和履行期限等条款。"],
+      ["标记风险条款", "标记表达模糊、遗漏事项、履行路径不清或后续争议风险。"],
+      ["形成修改意见", "根据材料和沟通情况形成协议修改意见及后续履行提示。"]
+    ]
+  },
+  {
+    id: "mediation-negotiation-howto",
+    name: "离婚调解谈判的一般流程",
+    steps: [
+      ["明确争议范围", "明确双方争议集中在财产、房产、彩礼、抚养、债务或其他事项。"],
+      ["整理谈判材料", "整理转账流水、房产材料、债务凭证、子女照顾事实等基础材料。"],
+      ["判断协商空间", "区分可协商事项、底线事项和需要继续保留证据的事项。"],
+      ["固定沟通成果", "对协商结果形成书面记录，并提示后续履行和违约风险。"]
+    ]
+  },
+  {
+    id: "litigation-response-howto",
+    name: "诉讼离婚应对的一般流程",
+    steps: [
+      ["整理诉讼材料", "整理身份、婚姻登记、财产、债务、子女抚养及沟通记录等材料。"],
+      ["梳理争议焦点", "围绕诉讼请求、答辩思路、证据目标和程序节点梳理争议焦点。"],
+      ["组织证据清单", "按财产分割、债务承担、抚养安排等问题组织证据清单。"],
+      ["跟进程序节点", "根据立案、举证、开庭、调解或判后履行等节点提示材料补充和风险变化。"]
+    ]
+  }
+].map(({ id, name, steps }) => ({
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "@id": `${siteConfig.origin}/#${id}`,
+  name,
+  step: steps.map(([stepName, text], index) => ({
+    "@type": "HowToStep",
+    position: index + 1,
+    name: stepName,
+    text
+  }))
+}));
+
 export const speakableSchema = (path, cssSelector = ".hero-copy h1, .hero-intro") => ({
   "@context": "https://schema.org",
   "@type": "SpeakableSpecification",

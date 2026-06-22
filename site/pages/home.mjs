@@ -11,6 +11,7 @@ import {
   legalServiceSchema,
   organizationSchema,
   personSchema,
+  servicePathHowToSchemas,
   speakableSchema,
   websiteSchema
 } from "../components/json-ld.mjs";
@@ -29,10 +30,28 @@ const moneyHouseDebt = [
 ];
 
 const consultationSteps = [
-    ["01", "前期沟通", "先把婚姻状态、争议类型、当前阶段和最担心的问题讲清楚，不急着提交敏感材料。"],
-    ["02", "材料梳理", "把钱、房、债、孩子安排和关键时间线拆成清单，先看现有材料能说明什么。"],
-    ["03", "路径判断", "判断是适合先审协议、继续谈判调解，还是需要围绕诉讼请求和证据做准备。"],
-    ["04", "依法办理", "正式委托后按合同约定推进协议审查、文书准备、沟通跟进或诉讼准备。"]
+  ["01", "初步沟通", "了解婚姻状态、争议类型、当前阶段和主要担忧。"],
+  ["02", "争议拆分", "判断是否涉及房产、彩礼、债务、子女抚养、协议或大额转账。"],
+  ["03", "材料清单", "按钱、房、债、孩子和时间线整理现有材料，标记材料缺口。"],
+  ["04", "路径选择", "再判断适合协议审查、调解谈判，还是诉讼应对。"]
+];
+
+const processTracks = [
+  {
+    title: "协议审查路径",
+    intro: "适合已经有协议草稿或双方基本有沟通基础的情况，重点看条款是否清楚、完整、可执行。",
+    steps: ["核对协议主体和基本信息", "审查房产、债务、抚养、探望、补偿条款", "标记模糊、遗漏或难履行的条款", "形成修改意见和后续履行提示"]
+  },
+  {
+    title: "调解谈判路径",
+    intro: "适合双方存在分歧但仍有沟通空间的情况，重点是先确定争议范围、材料基础和谈判底线。",
+    steps: ["明确谈判目标和核心争议", "区分可协商事项和需保留证据事项", "准备彩礼、房产、债务、抚养等材料底稿", "固定协商成果并提示履行风险"]
+  },
+  {
+    title: "诉讼应对路径",
+    intro: "适合无法协商一致或已经进入诉讼程序的情况，重点是围绕事实、证据、请求和程序风险做准备。",
+    steps: ["整理起诉或应诉基础材料", "梳理诉讼请求、答辩思路和争议焦点", "组织财产、债务、子女抚养等证据清单", "根据程序节点补充材料并提示后续安排"]
+  }
 ];
 
 const serviceModes = [
@@ -123,8 +142,11 @@ export const renderHome = () => {
 
     <section class="section process-section">
       <div class="shell">
-        ${sectionHeading("服务流程", "避免糊涂签、盲目谈、仓促诉", "从初步沟通到材料梳理，再到协议、调解或诉讼路径判断。")}
+        ${sectionHeading("服务流程", "避免糊涂签、盲目谈、仓促诉", "先完成前期准备，再根据事实、证据和沟通基础进入协议审查、调解谈判或诉讼应对路径。")}
         <ol class="step-grid">${consultationSteps.map(([number, title, text]) => `<li><span>${number}</span><h3>${title}</h3><p>${text}</p></li>`).join("")}</ol>
+        <div class="process-path-grid">
+          ${processTracks.map((track) => `<article class="process-path-card"><h3>${escapeHtml(track.title)}</h3><p>${escapeHtml(track.intro)}</p><ol>${track.steps.map((step, index) => `<li><span>${String(index + 1).padStart(2, "0")}</span>${escapeHtml(step)}</li>`).join("")}</ol></article>`).join("")}
+        </div>
         <p class="phase-note">以上流程为一般服务流程说明，不构成对案件结果的承诺。具体处理方式需结合事实、证据、双方情况和法律规定综合判断。</p>
       </div>
     </section>
@@ -162,6 +184,7 @@ export const renderHome = () => {
       faqSchema(homeFaqs, "/"),
       breadcrumbSchema(breadcrumbs),
       howToSchema(),
+      ...servicePathHowToSchemas(),
       speakableSchema("/", ".hero-copy h1, .hero-intro")
     ]
   });
