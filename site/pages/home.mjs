@@ -19,7 +19,7 @@ export const homeMeta = Object.freeze({
   path: "/",
   title: "李英姿律师｜长沙婚姻家事法律服务｜湖南泰宗律师事务所",
   description:
-    "李英姿律师，长沙婚姻家事律师，普法IP英姿律见，现执业于湖南泰宗律师事务所，专注离婚纠纷、财产分割、彩礼返还、子女抚养权、婚内债务、婚前婚后协议等家事案件。"
+    "李英姿律师，长沙婚姻家事律师，普法IP英姿律见，现执业于湖南泰宗律师事务所。离婚前先理清钱、房、债和子女安排，围绕协议审查、调解谈判、诉讼应对提供法律服务。"
 });
 
 const moneyHouseDebt = [
@@ -29,37 +29,37 @@ const moneyHouseDebt = [
 ];
 
 const consultationSteps = [
-  ["01", "前期沟通", "了解婚姻状态、争议类型、当前阶段和主要担忧，提醒隐私材料先脱敏。"],
-  ["02", "材料梳理", "制作婚姻时间线，整理钱、房、债、子女抚养和现有证据材料。"],
-  ["03", "路径判断", "结合材料基础判断协议审查、调解谈判或诉讼应对路径。"],
-  ["04", "依法办理", "根据需要审查协议、准备文书、推进沟通或诉讼准备，并提示后续履行风险。"]
+    ["01", "前期沟通", "先把婚姻状态、争议类型、当前阶段和最担心的问题讲清楚，不急着提交敏感材料。"],
+    ["02", "材料梳理", "把钱、房、债、孩子安排和关键时间线拆成清单，先看现有材料能说明什么。"],
+    ["03", "路径判断", "判断是适合先审协议、继续谈判调解，还是需要围绕诉讼请求和证据做准备。"],
+    ["04", "依法办理", "正式委托后按合同约定推进协议审查、文书准备、沟通跟进或诉讼准备。"]
 ];
 
 const serviceModes = [
   {
     title: "协议审查",
-    text: "适用于双方已有一定沟通基础，希望通过协议方式处理离婚、财产、债务、子女抚养等事项的情况。重点是审查条款是否清楚、完整、可执行。",
+    text: "协议不是能签字就可以。适用于双方已有沟通基础，希望通过协议处理离婚、财产、债务、子女抚养等事项的情况，重点看条款是否清楚、完整、可执行。",
     points: ["离婚协议审查", "婚前协议", "婚内财产约定", "抚养协议", "离婚后补充协议", "房产和债务条款审查"]
   },
   {
     title: "调解谈判",
-    text: "适用于双方存在分歧，但仍有协商空间的婚姻家事问题。重点是先梳理争议范围、材料基础和谈判底线，再判断是否适合调解或继续协商。",
+    text: "谈判不是只靠让步。适用于双方存在分歧但仍有协商空间的婚姻家事问题，重点是先梳理争议范围、材料基础和谈判底线。",
     points: ["离婚谈判", "彩礼返还协商", "房产分割协商", "抚养权沟通", "夫妻共同债务协商", "婚内大额转账与赠与返还争议沟通"]
   },
   {
     title: "诉讼应对",
-    text: "适用于双方无法协商一致，或已经进入诉讼程序的离婚及婚姻家事争议。重点是围绕事实、证据、诉讼请求和程序风险进行准备。",
+    text: "诉讼不是临时上场。适用于无法协商一致，或已经进入诉讼程序的离婚及婚姻家事争议，重点是围绕事实、证据、诉讼请求和程序风险准备。",
     points: ["诉讼离婚", "离婚财产分割", "彩礼返还", "子女抚养权争议", "夫妻共同债务", "离婚协议履行争议"]
   }
 ];
 
 const typicalScenarios = [
-  ["准备离婚，但不清楚财产、房产、债务如何整理", "可先围绕钱、房、债形成清单，再判断协议、调解或诉讼路径。"],
-  ["父母出资买房，离婚时房产归属有争议", "需要整理购房合同、出资流水、还贷记录、登记情况和双方约定。"],
-  ["彩礼金额较高，双方对是否返还存在分歧", "需要结合登记、共同生活、转账凭证、礼金用途和双方情况判断。"],
-  ["双方有子女，抚养权和探望安排谈不拢", "需要梳理孩子实际照顾、生活稳定性、教育医疗、双方抚养条件等材料。"],
-  ["一方婚内向婚外异性或第三方大额转账", "能否主张返还，需要结合资金来源、转账性质、双方关系和证据材料判断。"],
-  ["离婚协议已经拟好，但条款写得不清楚", "可重点审查房产、债务、抚养费、探望、补偿和履行期限等内容。"]
+  ["准备离婚，但不清楚财产、房产、债务如何整理", "先不要只问能不能离，先围绕钱、房、债形成清单，再判断协议、调解或诉讼路径。"],
+  ["父母出资买房，离婚时房产归属有争议", "房本登记不是唯一因素，需要整理购房合同、出资流水、还贷记录、登记情况和双方约定。"],
+  ["彩礼金额较高，双方对是否返还存在分歧", "彩礼争议不能只看是否领证，需要结合共同生活、转账凭证、礼金用途和双方情况判断。"],
+  ["双方有子女，抚养权和探望安排谈不拢", "抚养权不是简单比较收入，需要梳理孩子实际照顾、生活稳定性、教育医疗和陪伴事实。"],
+  ["一方婚内向婚外异性或第三方大额转账", "能否主张返还，关键看资金来源、转账性质、双方关系、用途和证据链是否能对应。"],
+  ["离婚协议已经拟好，但条款写得不清楚", "协议条款模糊容易留下后续争议，应重点审查房产、债务、抚养费、探望、补偿和履行期限。"]
 ];
 
 export const renderHome = () => {
@@ -71,11 +71,11 @@ export const renderHome = () => {
         <div class="hero-copy">
           <p class="eyebrow">长沙婚姻家事法律服务</p>
           <h1>${escapeHtml(siteConfig.slogan)}</h1>
-          <p class="hero-subtitle">英姿律见｜李英姿律师，专注长沙婚姻家事纠纷处理</p>
-          <p class="hero-intro">${lawyer.displayName}现执业于${lawyer.organization}。核心业务涉及离婚纠纷、彩礼返还、财产分割、子女抚养权、离婚协议审查、婚内债务、婚前婚后协议等问题。</p>
+          <p class="hero-subtitle">协议能不能签、房子怎么列、债务谁来担，先把风险看清楚。</p>
+          <p class="hero-intro">${lawyer.displayName}现执业于${lawyer.organization}。围绕长沙离婚业务和婚姻家事法律服务，重点处理离婚纠纷、彩礼返还、财产分割、子女抚养权、离婚协议审查、夫妻共同债务等问题。</p>
           <div class="hero-actions">
             <a class="button primary" href="${siteConfig.phoneHref}">电话 ${siteConfig.phone}</a>
-            <a class="button secondary" href="/lawyers/li-yingzi/">查看律师介绍</a>
+            <a class="button secondary" href="#service-paths">先看服务路径</a>
           </div>
           <p class="hero-note">公众号：${lawyer.contentBrand}</p>
           <p class="legal-note">${siteConfig.sloganNotice}</p>
@@ -103,9 +103,9 @@ export const renderHome = () => {
       </div>
     </section>
 
-    <section class="section service-mode-section">
+    <section class="section service-mode-section" id="service-paths">
       <div class="shell">
-        ${sectionHeading("我们的服务", "协议审查、调解谈判、诉讼应对", "围绕协议审查、调解谈判与诉讼应对，先理清钱、房、债，再判断处理路径。")}
+        ${sectionHeading("我们的服务", "不是只给结论，而是先判断路径", "围绕协议审查、调解谈判与诉讼应对，先理清钱、房、债和子女安排，再判断下一步怎么走。")}
         <div class="service-mode-grid">
           ${serviceModes.map((mode, index) => `<article class="service-mode-card"><span>${String(index + 1).padStart(2, "0")}</span><h3>${escapeHtml(mode.title)}</h3><p>${escapeHtml(mode.text)}</p><ul>${mode.points.map((point) => `<li>${escapeHtml(point)}</li>`).join("")}</ul></article>`).join("")}
         </div>
@@ -114,7 +114,7 @@ export const renderHome = () => {
 
     <section class="section services-section" id="services">
       <div class="shell">
-        ${sectionHeading("核心业务", "婚姻家事服务方向", "每类问题的事实和证据重点不同，先进入对应主题了解需要整理的内容。")}
+        ${sectionHeading("核心业务", "婚姻家事服务方向", "每类问题的事实、证据和处理重点不同，先进入对应主题了解需要整理什么、注意什么。")}
         <div class="service-grid">
           ${services.slice(0, 9).map((service, index) => `<a class="service-card" href="${service.path}"><span>${String(index + 1).padStart(2, "0")}</span><h3>${escapeHtml(service.name)}</h3><p>${escapeHtml(service.summary)}</p><strong>了解服务方向 →</strong></a>`).join("")}
         </div>
@@ -123,7 +123,7 @@ export const renderHome = () => {
 
     <section class="section process-section">
       <div class="shell">
-        ${sectionHeading("服务流程", "从初步沟通到依法办理", "从初步沟通到材料梳理，再到协议、调解或诉讼路径判断。")}
+        ${sectionHeading("服务流程", "避免糊涂签、盲目谈、仓促诉", "从初步沟通到材料梳理，再到协议、调解或诉讼路径判断。")}
         <ol class="step-grid">${consultationSteps.map(([number, title, text]) => `<li><span>${number}</span><h3>${title}</h3><p>${text}</p></li>`).join("")}</ol>
         <p class="phase-note">以上流程为一般服务流程说明，不构成对案件结果的承诺。具体处理方式需结合事实、证据、双方情况和法律规定综合判断。</p>
       </div>
@@ -131,7 +131,7 @@ export const renderHome = () => {
 
     <section class="section scenario-section">
       <div class="shell">
-        ${sectionHeading("典型服务场景", "常见婚姻家事问题如何先做判断", "以下为常见婚姻家事问题场景，不代表具体案件结果。")}
+        ${sectionHeading("典型服务场景", "把问题说清楚，才好判断下一步", "以下为常见婚姻家事问题场景，不代表具体案件结果。")}
         <div class="detail-grid">${typicalScenarios.map(([title, text]) => `<article class="detail-card"><h3>${escapeHtml(title)}</h3><p>${escapeHtml(text)}</p></article>`).join("")}</div>
       </div>
     </section>
