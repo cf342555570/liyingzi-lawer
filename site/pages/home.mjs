@@ -29,10 +29,37 @@ const moneyHouseDebt = [
 ];
 
 const consultationSteps = [
-  ["01", "初步沟通", "说明问题类型、目前阶段和已经掌握的基本情况。"],
-  ["02", "整理材料", "按财产、房产、债务和子女问题分类形成清单。"],
-  ["03", "分析路径", "结合事实和证据讨论协议、谈判、调解或诉讼路径。"],
-  ["04", "依法办理", "需要正式服务时，由律师事务所统一接受委托。"]
+  ["01", "前期沟通", "了解婚姻状态、争议类型、当前阶段和主要担忧，提醒隐私材料先脱敏。"],
+  ["02", "材料梳理", "制作婚姻时间线，整理钱、房、债、子女抚养和现有证据材料。"],
+  ["03", "路径判断", "结合材料基础判断协议审查、调解谈判或诉讼应对路径。"],
+  ["04", "依法办理", "根据需要审查协议、准备文书、推进沟通或诉讼准备，并提示后续履行风险。"]
+];
+
+const serviceModes = [
+  {
+    title: "协议审查",
+    text: "适用于双方已有一定沟通基础，希望通过协议方式处理离婚、财产、债务、子女抚养等事项的情况。重点是审查条款是否清楚、完整、可执行。",
+    points: ["离婚协议审查", "婚前协议", "婚内财产约定", "抚养协议", "离婚后补充协议", "房产和债务条款审查"]
+  },
+  {
+    title: "调解谈判",
+    text: "适用于双方存在分歧，但仍有协商空间的婚姻家事问题。重点是先梳理争议范围、材料基础和谈判底线，再判断是否适合调解或继续协商。",
+    points: ["离婚谈判", "彩礼返还协商", "房产分割协商", "抚养权沟通", "夫妻共同债务协商", "婚内大额转账与赠与返还争议沟通"]
+  },
+  {
+    title: "诉讼应对",
+    text: "适用于双方无法协商一致，或已经进入诉讼程序的离婚及婚姻家事争议。重点是围绕事实、证据、诉讼请求和程序风险进行准备。",
+    points: ["诉讼离婚", "离婚财产分割", "彩礼返还", "子女抚养权争议", "夫妻共同债务", "离婚协议履行争议"]
+  }
+];
+
+const typicalScenarios = [
+  ["准备离婚，但不清楚财产、房产、债务如何整理", "可先围绕钱、房、债形成清单，再判断协议、调解或诉讼路径。"],
+  ["父母出资买房，离婚时房产归属有争议", "需要整理购房合同、出资流水、还贷记录、登记情况和双方约定。"],
+  ["彩礼金额较高，双方对是否返还存在分歧", "需要结合登记、共同生活、转账凭证、礼金用途和双方情况判断。"],
+  ["双方有子女，抚养权和探望安排谈不拢", "需要梳理孩子实际照顾、生活稳定性、教育医疗、双方抚养条件等材料。"],
+  ["一方婚内向婚外异性或第三方大额转账", "能否主张返还，需要结合资金来源、转账性质、双方关系和证据材料判断。"],
+  ["离婚协议已经拟好，但条款写得不清楚", "可重点审查房产、债务、抚养费、探望、补偿和履行期限等内容。"]
 ];
 
 export const renderHome = () => {
@@ -76,6 +103,15 @@ export const renderHome = () => {
       </div>
     </section>
 
+    <section class="section service-mode-section">
+      <div class="shell">
+        ${sectionHeading("我们的服务", "协议审查、调解谈判、诉讼应对", "围绕协议审查、调解谈判与诉讼应对，先理清钱、房、债，再判断处理路径。")}
+        <div class="service-mode-grid">
+          ${serviceModes.map((mode, index) => `<article class="service-mode-card"><span>${String(index + 1).padStart(2, "0")}</span><h3>${escapeHtml(mode.title)}</h3><p>${escapeHtml(mode.text)}</p><ul>${mode.points.map((point) => `<li>${escapeHtml(point)}</li>`).join("")}</ul></article>`).join("")}
+        </div>
+      </div>
+    </section>
+
     <section class="section services-section" id="services">
       <div class="shell">
         ${sectionHeading("核心业务", "婚姻家事服务方向", "每类问题的事实和证据重点不同，先进入对应主题了解需要整理的内容。")}
@@ -87,8 +123,16 @@ export const renderHome = () => {
 
     <section class="section process-section">
       <div class="shell">
-        ${sectionHeading("基本流程", "从问题描述到处理路径", "调解优先，但不回避诉讼处理；具体选择取决于事实、证据和双方情况。")}
+        ${sectionHeading("服务流程", "从初步沟通到依法办理", "从初步沟通到材料梳理，再到协议、调解或诉讼路径判断。")}
         <ol class="step-grid">${consultationSteps.map(([number, title, text]) => `<li><span>${number}</span><h3>${title}</h3><p>${text}</p></li>`).join("")}</ol>
+        <p class="phase-note">以上流程为一般服务流程说明，不构成对案件结果的承诺。具体处理方式需结合事实、证据、双方情况和法律规定综合判断。</p>
+      </div>
+    </section>
+
+    <section class="section scenario-section">
+      <div class="shell">
+        ${sectionHeading("典型服务场景", "常见婚姻家事问题如何先做判断", "以下为常见婚姻家事问题场景，不代表具体案件结果。")}
+        <div class="detail-grid">${typicalScenarios.map(([title, text]) => `<article class="detail-card"><h3>${escapeHtml(title)}</h3><p>${escapeHtml(text)}</p></article>`).join("")}</div>
       </div>
     </section>
 

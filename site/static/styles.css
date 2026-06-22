@@ -1,4 +1,4 @@
-:root {
+﻿:root {
   --green-950: #0a2923;
   --green-900: #103a31;
   --green-800: #174b40;
@@ -255,7 +255,7 @@ p { color: var(--muted); }
   .hero h1 { font-size: 42px; }
   .hero-intro { font-size: 15px; }
   .identity-panel { padding: 28px 22px; }
-  .pillar-grid, .service-grid, .step-grid, .card-grid, .contact-card, .privacy-card, .detail-grid, .help-grid, .scenario-grid, .caution-grid, .related-grid, .contact-methods { grid-template-columns: 1fr; }
+  .pillar-grid, .service-grid, .service-mode-grid, .step-grid, .card-grid, .contact-card, .privacy-card, .detail-grid, .help-grid, .scenario-grid, .caution-grid, .related-grid, .contact-methods { grid-template-columns: 1fr; }
   .pillar { min-height: auto; }
   .step-grid li { padding: 22px 10px 22px 24px; border-left: 1px solid #d7cfbc; }
   .service-card { min-height: 210px; }
@@ -335,6 +335,15 @@ body { background: #f7f4ed; letter-spacing: .01em; }
 .pillar:first-child { border-left: 1px solid var(--line); }
 .pillar > span { border-radius: 3px; color: #eedebd; background: var(--green-950); }
 .pillar h3 { font-size: 25px; }
+.service-mode-section { background: #f6f2e9; }
+.service-mode-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; border: 1px solid var(--line); background: var(--line); }
+.service-mode-card { min-height: 420px; padding: 32px; background: #fbf9f4; }
+.service-mode-card > span { color: var(--gold); font-size: 12px; font-weight: 800; letter-spacing: .12em; }
+.service-mode-card h3 { margin: 24px 0 12px; color: var(--green-950); font-size: 26px; }
+.service-mode-card p { min-height: 112px; margin-bottom: 18px; font-size: 14px; }
+.service-mode-card ul { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.service-mode-card li { position: relative; padding-left: 16px; color: #42514c; font-size: 13px; }
+.service-mode-card li::before { content: ""; position: absolute; left: 0; top: .8em; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
 
 .services-section { background-color: var(--green-950); background-image: linear-gradient(125deg, rgba(255,255,255,.025), transparent 42%), url('legal-architecture.svg'); background-position: right center; background-size: cover; }
 .service-grid { gap: 1px; border: 1px solid rgba(255,255,255,.13); background: rgba(255,255,255,.13); }
@@ -615,3 +624,4 @@ body { background: #f7f4ed; letter-spacing: .01em; }
     box-shadow: inset 4px 0 0 var(--gold) !important;
   }
 }
+

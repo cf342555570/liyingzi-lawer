@@ -138,7 +138,7 @@ for (const [relativePath, html] of all) {
 
 await cp(join(root, "site", "static"), join(output, "assets"), { recursive: true });
 
-// Admin files are NOT deployed to production; used only via local dev server
+await cp(join(root, "site", "admin"), join(output, "admin"), { recursive: true });
 
 // CSS fingerprinting
 const cssPath = join(output, "assets", "styles.css");

@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs";
 import { officialContentProfiles, siteConfig, absoluteUrl, relativeAsset } from "../data/site-config.mjs";
 import { lawyer } from "../data/li-yingzi.mjs";
 import { renderJsonLd } from "./json-ld.mjs";
@@ -16,16 +17,10 @@ export const renderBreadcrumbs = (items) => `
     <ol>${items.map((item, index) => `<li>${index === items.length - 1 ? `<span aria-current="page">${escapeHtml(item.name)}</span>` : `<a href="${item.path}">${escapeHtml(item.name)}</a>`}</li>`).join("")}</ol>
   </nav>`;
 
-const navItems = Object.freeze([
-  ["首页", "/"],
-  ["律师介绍", "/lawyers/li-yingzi/"],
-  ["离婚业务", "/#services"],
-  ["区县服务", "/areas/"],
-  ["案例分析", "/case-analysis/"],
-  ["普法专栏", "/articles/"],
-  ["FAQ", "/faq/"],
-  ["联系", "/contact/"]
-]);
+const navItems = Object.freeze(
+  JSON.parse(readFileSync(new URL("../data/navigation.json", import.meta.url), "utf8")).items
+    .map(({ label, href }) => [label, href])
+);
 
 const isActive = (currentPath, href) => {
   if (href === "/") return currentPath === "/";
@@ -91,7 +86,7 @@ const footer = `
     <div class="shell disclaimer" role="note" aria-label="法律信息免责声明">
       <strong>官方说明</strong><p>${siteConfig.footerOfficialText}</p>
     </div>
-    <div class="shell footer-bottom"><span>${siteConfig.shortName}</span><span>服务区域：${lawyer.serviceArea}</span></div>
+    <div class="shell footer-bottom"><span>${siteConfig.shortName}</span><span>服务区域：${lawyer.serviceArea}</span><a class="admin-login-link" href="/admin/" rel="nofollow">后台登录</a></div>
   </footer>`;
 
 const navScript = `
