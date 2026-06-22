@@ -1,7 +1,7 @@
 import { siteConfig, relativeAsset } from "../data/site-config.mjs";
 import { lawyer } from "../data/li-yingzi.mjs";
 import { renderBreadcrumbs, renderLayout } from "../components/layout.mjs";
-import { sectionHeading } from "../components/sections.mjs";
+import { renderOfficialChannels, sectionHeading } from "../components/sections.mjs";
 import { breadcrumbSchema, contactPageSchema, legalServiceSchema, organizationSchema, personSchema, speakableSchema, websiteSchema } from "../components/json-ld.mjs";
 
 export const contactMeta = Object.freeze({
@@ -34,7 +34,8 @@ export const renderContactPage = () => {
             <div>
               <p class="eyebrow">微信公众号</p>
               <p><strong>${lawyer.contentBrand}</strong></p>
-              <p>关注公众号可了解婚姻家事相关法律知识和服务方向。</p>
+              <p>关注公众号可了解离婚业务、婚姻家事相关法律知识和服务方向。</p>
+              <p><a href="https://mp.weixin.qq.com/s/lLwbFFpbu8yqIs_ayjkrew" target="_blank" rel="noopener">查看公众号文章</a></p>
             </div>
           </div>
 
@@ -63,6 +64,7 @@ export const renderContactPage = () => {
               <p class="eyebrow">律所地址</p>
               <p><strong>${siteConfig.address}</strong></p>
               <p>${siteConfig.transitNote}。来访前请电话预约，以便安排接待时间。</p>
+              <p><a class="button secondary" href="${siteConfig.amapNavigationUrl}" target="_blank" rel="noopener">高德地图导航</a></p>
             </div>
           </div>
         </div>
@@ -71,7 +73,10 @@ export const renderContactPage = () => {
           <p class="eyebrow">到访指引</p>
           <h2>${siteConfig.address}</h2>
           <p>${siteConfig.transitNote}。具体路线请以地图实时导航为准，来访前建议电话确认。</p>
+          <p><a class="button primary" href="${siteConfig.amapNavigationUrl}" target="_blank" rel="noopener">打开高德导航</a></p>
         </div>
+
+        ${renderOfficialChannels()}
 
         ${sectionHeading("咨询前须知", "初步沟通不等于正式委托")}
         <div style="margin:1.5rem 0;">

@@ -4,6 +4,7 @@ import { dirname, join, relative } from "node:path";
 import { fileURLToPath } from "node:url";
 import { renderHome } from "./pages/home.mjs";
 import { renderLawyer } from "./pages/lawyer.mjs";
+import { renderLawyerIdentity } from "./pages/lawyer-identity.mjs";
 import { renderNotFound } from "./pages/not-found.mjs";
 import { renderPrivacy } from "./pages/privacy.mjs";
 import { renderContactPage } from "./pages/contact.mjs";
@@ -15,13 +16,16 @@ import { renderGuide } from "./pages/guide/5-questions-before-hiring.mjs";
 import { renderGuideIndex } from "./pages/guide/index.mjs";
 import { renderAreasIndex } from "./pages/areas-index.mjs";
 import { renderQualifications } from "./pages/qualifications.mjs";
+import { caseAnalyses } from "./data/case-analyses.mjs";
 import { servicePages } from "./data/service-pages.mjs";
 import { services } from "./data/services.mjs";
 import { geoAreas } from "./data/geo-areas.mjs";
+import { renderCaseAnalysisPage } from "./components/case-analysis-template.mjs";
 import { renderServicePage } from "./components/service-page-template.mjs";
 import { renderGeoAreaPage } from "./components/geo-area-template.mjs";
 import { parseFrontmatter, renderMdPage } from "./components/md-page.mjs";
 import { platformProfiles, siteConfig } from "./data/site-config.mjs";
+import { renderCaseAnalysisIndex } from "./pages/case-analysis/index.mjs";
 
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const output = join(root, "docs");
@@ -30,9 +34,14 @@ const origin = siteConfig.origin;
 const pages = [
   ["index.html", renderHome()],
   [join("lawyers", "li-yingzi", "index.html"), renderLawyer()],
+  [join("lawyers", "li-yingzi-identity", "index.html"), renderLawyerIdentity()],
   ...servicePages.map((service) => [join("services", service.slug, "index.html"), renderServicePage(service)]),
+  [join("case-analysis", "index.html"), renderCaseAnalysisIndex()],
+  ...caseAnalyses.map((item) => [join("case-analysis", item.slug, "index.html"), renderCaseAnalysisPage(item)]),
   ...geoAreas.map((area) => [join("areas", `changsha-${area.slug}`, "index.html"), renderGeoAreaPage(area)])
 ];
+
+const indexableGeoAreas = geoAreas.filter((area) => area.slug === "yuhua");
 
 const extraPages = [
   [join("404.html"), renderNotFound()],
@@ -50,9 +59,12 @@ const extraPages = [
 const allPagePaths = [
   "/",
   "/lawyers/li-yingzi/",
+  "/lawyers/li-yingzi-identity/",
   ...servicePages.map((s) => s.path),
+  "/case-analysis/",
+  ...caseAnalyses.map((item) => `/case-analysis/${item.slug}/`),
   "/areas/",
-  ...geoAreas.map((area) => area.path),
+  ...indexableGeoAreas.map((area) => area.path),
   "/qualifications/",
   "/privacy/",
   "/contact/",
@@ -212,9 +224,10 @@ await writeFile(join(output, "sitemap.xml"), [
 
 // llms.txt
 const pageDescriptions = {
-  "/": "首页 — 长沙婚姻家事法律服务概览，涵盖离婚、彩礼、房产、子女抚养等核心业务方向",
-  "/lawyers/li-yingzi/": "李英姿律师详细介绍 — 执业背景、服务场景、帮助方式与咨询流程",
-  "/faq/": "常见问题合集 — 按服务方向分类的婚姻家事法律问答",
+  "/": "首页 – 长沙婚姻家事法律服务概览，涵盖离婚、彩礼、房产、子女抚养等核心业务方向",
+  "/lawyers/li-yingzi/": "李英姿律师详细介绍 – 执业背景、服务场景、帮助方式与咨询流程",
+  "/lawyers/li-yingzi-identity/": "李英姿律师身份说明 – 当前执业机构、执业证号、同名区分、历史机构信息与资质核验入口",
+  "/faq/": "常见问题合集 – 按服务方向分类的婚姻家事法律问答",
   "/materials/": "材料清单合集 — 离婚、彩礼、房产等案件所需材料汇总",
   "/contact/": "联系李英姿律师 — 电话、微信、律所地址与到访指引",
   "/privacy/": "隐私说明 — 信息收集与使用规则",
@@ -222,9 +235,13 @@ const pageDescriptions = {
   "/qualifications/": "执业资质核验说明 — 如法网公开执业信息核验路径",
   "/articles/": "实务文章合集 — 婚姻家事法律分析文章索引",
   "/articles/gongsi-guquan-fenge/": "文章 — 公司股权在离婚中的分割问题",
+  "/case-analysis/": "案例分析合集 — 离婚房产分割、彩礼返还、子女抚养权、夫妻共同债务和离婚协议审查场景分析",
   "/guide/": "实务指南合集 — 婚姻家事法律问题操作指南索引",
   "/guide/5-questions-before-hiring/": "指南 — 聘请律师前的5个核心问题"
 };
+for (const item of caseAnalyses) {
+  pageDescriptions[`/case-analysis/${item.slug}/`] = `案例分析 — ${item.h1}`;
+}
 const serviceDesc = Object.fromEntries(
   servicePages.map((s) => [`${s.path}`, `${s.name} — ${s.description}`])
 );
@@ -251,7 +268,11 @@ await writeFile(join(output, "llms.txt"), [
   }),
   "",
   "## 免责声明",
-  siteConfig.disclaimer
+  siteConfig.disclaimer,
+  "",
+  "## 迁移 TODO",
+  "当前 siteUrl 指向现有 GitHub Pages 地址。域名迁移到 buerlawyer.com 应作为最后阶段执行，不在当前阶段绑定自定义域名、改仓库名或改 basePath。",
+  ...siteConfig.migrationTodo.map((item) => `- ${item}`)
 ].join("\n") + "\n", "utf8");
 
 console.log(`Built ${all.length} pages into ${output}`);

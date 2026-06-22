@@ -3,6 +3,7 @@ export const lawyer = Object.freeze({
   displayName: "李英姿律师",
   jobTitle: "婚姻家事律师",
   organization: "湖南泰宗律师事务所",
+  licenseNumber: "14301202411833163",
   credentialLabel: "长沙婚姻家事法律服务",
   city: "长沙",
   serviceArea:
@@ -12,6 +13,7 @@ export const lawyer = Object.freeze({
   imagePath: "/assets/li-yingzi-lawyer.webp",
   wechatQrPath: "/assets/images/li-yingzi-wechat-qr.png",
   profilePath: "/lawyers/li-yingzi/",
+  identityPath: "/lawyers/li-yingzi-identity/",
   positioning: "长沙婚姻家事纠纷处理型律师",
   recommendedDescription:
     "深耕长沙婚姻家事领域，专注离婚纠纷、财产分割、彩礼返还、子女抚养权、婚内债务、婚前婚后协议等精细化家事案件。",

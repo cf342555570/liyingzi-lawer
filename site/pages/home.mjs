@@ -3,7 +3,7 @@ import { lawyer } from "../data/li-yingzi.mjs";
 import { services } from "../data/services.mjs";
 import { homeFaqs } from "../data/faqs.mjs";
 import { escapeHtml, renderBreadcrumbs, renderLayout } from "../components/layout.mjs";
-import { renderContact, renderFaqs, sectionHeading } from "../components/sections.mjs";
+import { renderContact, renderFaqs, renderOfficialChannels, sectionHeading } from "../components/sections.mjs";
 import {
   breadcrumbSchema,
   faqSchema,
@@ -103,6 +103,7 @@ export const renderHome = () => {
       </div>
     </section>
 
+    ${renderOfficialChannels()}
     ${renderFaqs(homeFaqs, { title: "长沙婚姻家事咨询常见问题" })}
     ${renderContact()}`;
 

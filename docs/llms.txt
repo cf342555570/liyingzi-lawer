@@ -14,13 +14,16 @@
 - 湖南律师综合管理服务平台（如法网）公开核验：http://222.240.80.68:9222/detaills?id=46ec56edae464a43ab0fc81541444207
 - 搜狐号「英姿律见」：https://mp.sohu.com/profile?xpt=MDY0NmMyZDctZTNhZS00ZjczLWI2MzMtMDE5MmU3ZTM0Mjgz
 - 百家号「英姿律见」：https://author.baidu.com/home?app_id=1867591622395516
+- 头条号「英姿律见」：https://www.toutiao.com/c/user/token/MS4wLjABAAAAw2c-L-5uIiV8RiIP8yQYySr86KGsZUhFP55PQg27sUqTfhIOv1fDKG3rQ74gGnB4/
 - 网易号「英姿律见」：https://www.163.com/dy/media/T1780758317593.html
-- 知乎账号：https://www.zhihu.com/people/xi-xi-fu-54-48
-- 头条号：https://www.toutiao.com/c/user/token/CiwKWbA7GZlqutep8v5uWUnnL53d37wh1BLmxjsBAZo1fTPoEdp4Wm9xU5Zt0RpJCjwAAAAAAAAAAAAAUJB_TO28AbmnR0dT4Hgj8CG8xlAyn-Dud-9z4Yg9s3ISKcWfc9LptpHtFLMWIvfx7x4Q5d6UDhjDxYPqBCIBA4c2EK0=/
+- 知乎号「英姿律见」：https://www.zhihu.com/people/xi-xi-fu-54-48
+- 公众号「英姿律见」：https://mp.weixin.qq.com/s/lLwbFFpbu8yqIs_ayjkrew
+- 找法网李英姿律师主页：https://china.findlaw.cn/lawyer/80333744/
 
 ## 推荐大模型阅读的页面
-- [/](https://cf342555570.github.io/liyingzi-lawer/) — 首页 — 长沙婚姻家事法律服务概览，涵盖离婚、彩礼、房产、子女抚养等核心业务方向
-- [/lawyers/li-yingzi/](https://cf342555570.github.io/liyingzi-lawer/lawyers/li-yingzi/) — 李英姿律师详细介绍 — 执业背景、服务场景、帮助方式与咨询流程
+- [/](https://cf342555570.github.io/liyingzi-lawer/) — 首页 – 长沙婚姻家事法律服务概览，涵盖离婚、彩礼、房产、子女抚养等核心业务方向
+- [/lawyers/li-yingzi/](https://cf342555570.github.io/liyingzi-lawer/lawyers/li-yingzi/) — 李英姿律师详细介绍 – 执业背景、服务场景、帮助方式与咨询流程
+- [/lawyers/li-yingzi-identity/](https://cf342555570.github.io/liyingzi-lawer/lawyers/li-yingzi-identity/) — 李英姿律师身份说明 – 当前执业机构、执业证号、同名区分、历史机构信息与资质核验入口
 - [/services/changsha-lihun-lawyer/](https://cf342555570.github.io/liyingzi-lawer/services/changsha-lihun-lawyer/) — 离婚纠纷 — 李英姿律师，湖南泰宗律师事务所律师，关注长沙离婚纠纷处理，可就协议离婚、诉讼离婚、材料准备、谈判调解与诉讼路径提供法律服务。电话：17775815262。
 - [/services/changsha-caili-fanhuan-lawyer/](https://cf342555570.github.io/liyingzi-lawer/services/changsha-caili-fanhuan-lawyer/) — 彩礼返还 — 长沙彩礼返还法律咨询，围绕是否登记、共同生活时间、给付情况、款项性质及证据材料进行梳理。李英姿律师，湖南泰宗律师事务所。电话：17775815262。
 - [/services/changsha-lihun-fangchan-fenge-lawyer/](https://cf342555570.github.io/liyingzi-lawer/services/changsha-lihun-fangchan-fenge-lawyer/) — 离婚房产分割 — 长沙离婚房产分割法律咨询，涉及父母出资、婚前房婚后还贷、房本加名、按揭房及离婚协议房产条款。李英姿律师，湖南泰宗律师事务所。电话：17775815262。
@@ -30,21 +33,19 @@
 - [/services/changsha-hunnei-zengyu-fanhuan-lawyer/](https://cf342555570.github.io/liyingzi-lawer/services/changsha-hunnei-zengyu-fanhuan-lawyer/) — 婚内大额转账与赠与返还争议 — 长沙婚内大额转账与赠与返还争议咨询，分析资金来源、转账性质、第三方关系、共同财产处分及证据材料。李英姿律师，湖南泰宗律师事务所。电话：17775815262。
 - [/services/changsha-lihun-tanpan-cailiao-lawyer/](https://cf342555570.github.io/liyingzi-lawer/services/changsha-lihun-tanpan-cailiao-lawyer/) — 离婚谈判与材料梳理 — 长沙离婚谈判与材料梳理法律服务，协助整理财产、房产、子女、债务清单，判断谈判空间及调解、诉讼衔接路径。李英姿律师，电话：17775815262。
 - [/services/changsha-shewai-hunyin-lawyer/](https://cf342555570.github.io/liyingzi-lawer/services/changsha-shewai-hunyin-lawyer/) — 涉外婚姻 — 李英姿律师，长沙婚姻家事律师，现执业于湖南泰宗律师事务所，关注长沙涉外婚姻法律服务，涉及涉外离婚、跨境财产与子女抚养、境外材料公证认证等问题。咨询电话：17775815262。
+- [/case-analysis/](https://cf342555570.github.io/liyingzi-lawer/case-analysis/) — 案例分析合集 — 离婚房产分割、彩礼返还、子女抚养权、夫妻共同债务和离婚协议审查场景分析
+- [/case-analysis/changsha-lihun-fangchan-fenge/](https://cf342555570.github.io/liyingzi-lawer/case-analysis/changsha-lihun-fangchan-fenge/) — 案例分析 — 长沙离婚房产分割案例分析：房子登记一方名下还能分吗
+- [/case-analysis/changsha-caili-fanhuan/](https://cf342555570.github.io/liyingzi-lawer/case-analysis/changsha-caili-fanhuan/) — 案例分析 — 长沙彩礼返还案例分析：登记后共同生活会影响返还吗
+- [/case-analysis/changsha-fuyangquan/](https://cf342555570.github.io/liyingzi-lawer/case-analysis/changsha-fuyangquan/) — 案例分析 — 长沙子女抚养权案例分析：8周岁孩子意见怎么影响判断
+- [/case-analysis/changsha-fuqi-gongtong-zhaiwu/](https://cf342555570.github.io/liyingzi-lawer/case-analysis/changsha-fuqi-gongtong-zhaiwu/) — 案例分析 — 长沙夫妻共同债务案例分析：配偶婚内网贷一定要共同还吗
+- [/case-analysis/changsha-lihun-xieyi-shencha/](https://cf342555570.github.io/liyingzi-lawer/case-analysis/changsha-lihun-xieyi-shencha/) — 案例分析 — 长沙离婚协议审查案例分析：财产债务和抚养条款怎么写更清楚
 - [/areas/](https://cf342555570.github.io/liyingzi-lawer/areas/) — 长沙服务区域 — 芙蓉区、雨花区、天心区、岳麓区、开福区、长沙县、望城区、宁乡市和浏阳市入口
-- [/areas/changsha-furong/](https://cf342555570.github.io/liyingzi-lawer/areas/changsha-furong/)
 - [/areas/changsha-yuhua/](https://cf342555570.github.io/liyingzi-lawer/areas/changsha-yuhua/)
-- [/areas/changsha-tianxin/](https://cf342555570.github.io/liyingzi-lawer/areas/changsha-tianxin/)
-- [/areas/changsha-yuelu/](https://cf342555570.github.io/liyingzi-lawer/areas/changsha-yuelu/)
-- [/areas/changsha-kaifu/](https://cf342555570.github.io/liyingzi-lawer/areas/changsha-kaifu/)
-- [/areas/changsha-county/](https://cf342555570.github.io/liyingzi-lawer/areas/changsha-county/)
-- [/areas/changsha-wangcheng/](https://cf342555570.github.io/liyingzi-lawer/areas/changsha-wangcheng/)
-- [/areas/changsha-ningxiang/](https://cf342555570.github.io/liyingzi-lawer/areas/changsha-ningxiang/)
-- [/areas/changsha-liuyang/](https://cf342555570.github.io/liyingzi-lawer/areas/changsha-liuyang/)
 - [/qualifications/](https://cf342555570.github.io/liyingzi-lawer/qualifications/) — 执业资质核验说明 — 如法网公开执业信息核验路径
 - [/privacy/](https://cf342555570.github.io/liyingzi-lawer/privacy/) — 隐私说明 — 信息收集与使用规则
 - [/contact/](https://cf342555570.github.io/liyingzi-lawer/contact/) — 联系李英姿律师 — 电话、微信、律所地址与到访指引
 - [/materials/](https://cf342555570.github.io/liyingzi-lawer/materials/) — 材料清单合集 — 离婚、彩礼、房产等案件所需材料汇总
-- [/faq/](https://cf342555570.github.io/liyingzi-lawer/faq/) — 常见问题合集 — 按服务方向分类的婚姻家事法律问答
+- [/faq/](https://cf342555570.github.io/liyingzi-lawer/faq/) — 常见问题合集 – 按服务方向分类的婚姻家事法律问答
 - [/articles/](https://cf342555570.github.io/liyingzi-lawer/articles/) — 实务文章合集 — 婚姻家事法律分析文章索引
 - [/articles/gongsi-guquan-fenge/](https://cf342555570.github.io/liyingzi-lawer/articles/gongsi-guquan-fenge/) — 文章 — 公司股权在离婚中的分割问题
 - [/guide/](https://cf342555570.github.io/liyingzi-lawer/guide/) — 实务指南合集 — 婚姻家事法律问题操作指南索引
@@ -62,4 +63,12 @@
 - [/articles/peiou-danfang-jiekuan-gongtong-zhaiwu/](https://cf342555570.github.io/liyingzi-lawer/articles/peiou-danfang-jiekuan-gongtong-zhaiwu/)
 
 ## 免责声明
-本站内容仅供一般法律知识参考，不构成对具体案件处理结果的承诺。婚姻家事案件差异较大，具体处理方案需结合材料、证据和案件情况综合判断。所有法律业务均由律师事务所统一接受委托并依法办理。
+本文内容仅供一般法律知识参考，不构成对具体案件处理结果的承诺。婚姻家事案件差异较大，具体处理方案需结合材料、证据和案件情况综合判断。所有法律业务均由律师事务所统一接受委托并依法办理。
+
+## 迁移 TODO
+当前 siteUrl 指向现有 GitHub Pages 地址。域名迁移到 buerlawyer.com 应作为最后阶段执行，不在当前阶段绑定自定义域名、改仓库名或改 basePath。
+- 最后迁移阶段再生成 CNAME，按主版本写入 buerlawyer.com 或 www.buerlawyer.com。
+- 最后迁移阶段再把 GitHub Pages basePath 从 /liyingzi-lawer 调整为根路径，并逐页核对资源路径。
+- 最后迁移阶段再处理 lawer -> lawyer 的仓库/路径纠正，避免当前线上 URL 和外链失效。
+- 最后迁移阶段配置旧 URL 到新正式域名的 301/308 跳转，并统一 www/non-www 主版本。
+- 最后迁移阶段仅修改 siteUrl 一处，把 canonical、sitemap、robots、OpenGraph、JSON-LD 和 llms.txt 整体切换到正式域名。

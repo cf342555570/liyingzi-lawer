@@ -1,4 +1,4 @@
-import { siteConfig, absoluteUrl, relativeAsset } from "../data/site-config.mjs";
+import { officialContentProfiles, siteConfig, absoluteUrl, relativeAsset } from "../data/site-config.mjs";
 import { lawyer } from "../data/li-yingzi.mjs";
 import { renderJsonLd } from "./json-ld.mjs";
 
@@ -19,17 +19,17 @@ export const renderBreadcrumbs = (items) => `
 const navItems = Object.freeze([
   ["首页", "/"],
   ["律师介绍", "/lawyers/li-yingzi/"],
-  ["家事业务", "/#services"],
-  ["长沙区县服务", "/areas/"],
+  ["离婚业务", "/#services"],
+  ["区县服务", "/areas/"],
+  ["案例分析", "/case-analysis/"],
   ["普法专栏", "/articles/"],
-  ["FAQ问答", "/faq/"],
-  ["资质核验", "/qualifications/"],
-  ["联系我们", "/contact/"]
+  ["FAQ", "/faq/"],
+  ["联系", "/contact/"]
 ]);
 
 const isActive = (currentPath, href) => {
   if (href === "/") return currentPath === "/";
-  if (href.includes("#")) return currentPath === href.split("#")[0];
+  if (href.includes("#")) return false;
   return currentPath.startsWith(href);
 };
 
@@ -58,7 +58,6 @@ const renderHeader = (currentPath) => `
         </div>
         ${navItems.map(([label, href]) => `<a href="${href}"${isActive(currentPath, href) ? ` aria-current="page" class="active"` : ""}>${label}</a>`).join("")}
       </nav>
-      <a class="phone-link" href="${siteConfig.phoneHref}" aria-label="拨打咨询电话 ${siteConfig.phone}">${siteConfig.phone}</a>
     </div>
   </header>`;
 
@@ -70,14 +69,22 @@ const footer = `
         <p>${lawyer.displayName}｜${siteConfig.organization}</p>
         <p>${lawyer.credentialLabel}</p>
         <p>电话：<a href="${siteConfig.phoneHref}">${siteConfig.phone}</a></p>
+        <p>地址：<a href="${siteConfig.amapNavigationUrl}" target="_blank" rel="noopener">${siteConfig.address}</a></p>
         <p>公众号：${lawyer.contentBrand}</p>
       </div>
       <div class="footer-nav">
         <strong>浏览</strong>
         <nav aria-label="底部导航">
           ${navItems.map(([label, href]) => `<a href="${href}">${label}</a>`).join("")}
+          <a href="/qualifications/">资质核验</a>
           <a href="/materials/">材料清单</a>
           <a href="/privacy/">隐私说明</a>
+        </nav>
+      </div>
+      <div class="footer-nav official-footer-links">
+        <strong>官方内容矩阵</strong>
+        <nav aria-label="官方内容平台">
+          ${officialContentProfiles.map(({ name, url }) => `<a href="${url}" target="_blank" rel="noopener">${escapeHtml(name)}</a>`).join("")}
         </nav>
       </div>
     </div>
@@ -141,6 +148,8 @@ export const renderLayout = ({ title, description, path, body, schemas = [], key
   <meta name="theme-color" content="#ffffff">
   <link rel="icon" href="${faviconHref}" type="image/svg+xml">
   <link rel="stylesheet" href="${stylesheetHref}">
+  ${siteConfig.googleSiteVerification ? `<meta name="google-site-verification" content="${escapeHtml(siteConfig.googleSiteVerification)}">` : "<!-- TODO: 填入 Google Search Console 验证字符串后启用 google-site-verification -->"}
+  ${siteConfig.bingSiteVerification ? `<meta name="msvalidate.01" content="${escapeHtml(siteConfig.bingSiteVerification)}">` : "<!-- TODO: 填入 Bing Webmaster Tools 验证字符串后启用 msvalidate.01 -->"}
   ${renderJsonLd(schemas)}
 </head>
 <body>

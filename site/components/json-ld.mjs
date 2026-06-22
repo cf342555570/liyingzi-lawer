@@ -27,7 +27,7 @@ const postalAddress = () => ({
 export const personSchema = () =>
   compact({
     "@context": "https://schema.org",
-    "@type": "Person",
+    "@type": ["Person", "Attorney"],
     "@id": siteConfig.entityIds.person,
     name: lawyer.name,
     alternateName: lawyer.contentBrand,
@@ -37,9 +37,11 @@ export const personSchema = () =>
     url: absoluteUrl(lawyer.profilePath),
     image: absoluteUrl(lawyer.imagePath),
     telephone: lawyer.phone,
+    identifier: lawyer.licenseNumber,
     hasCredential: {
       "@type": "EducationalOccupationalCredential",
       credentialCategory: "律师执业资质",
+      credentialID: lawyer.licenseNumber,
       recognizedBy: { "@type": "GovernmentOrganization", name: "湖南如法网" },
       url: officialCredentialUrl
     },
@@ -53,13 +55,14 @@ export const personSchema = () =>
 export const organizationSchema = () =>
   compact({
     "@context": "https://schema.org",
-    "@type": ["LocalBusiness", "LegalService"],
+    "@type": ["Organization", "LocalBusiness", "LegalService"],
     "@id": siteConfig.entityIds.organization,
     name: siteConfig.organization,
     url: siteConfig.origin,
     telephone: siteConfig.organizationPhone,
     email: siteConfig.organizationEmail,
     address: postalAddress(),
+    hasMap: siteConfig.amapNavigationUrl,
     geo: {
       "@type": "GeoCoordinates",
       latitude: 28.146,
@@ -80,6 +83,7 @@ export const legalServiceSchema = () =>
     url: absoluteUrl(lawyer.profilePath),
     telephone: siteConfig.phone,
     address: postalAddress(),
+    hasMap: siteConfig.amapNavigationUrl,
     areaServed: areaServed(),
     parentOrganization: { "@id": siteConfig.entityIds.organization },
     provider: { "@id": siteConfig.entityIds.person },
@@ -206,6 +210,8 @@ export const articleSchema = ({ title, description, path, datePublished }) =>
     headline: title,
     description,
     url: absoluteUrl(path),
+    mainEntityOfPage: absoluteUrl(path),
+    image: absoluteUrl(lawyer.imagePath),
     datePublished,
     dateModified: datePublished,
     author: { "@id": siteConfig.entityIds.person },

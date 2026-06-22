@@ -15,9 +15,7 @@
     "preview": "python -m http.server 8080 -d docs"
   },
   "devDependencies": {
-    "decap-server": "^3.9.1"
-  },
-  "dependencies": {
+    "decap-server": "^3.9.1",
     "sharp": "^0.35.2"
   }
 }

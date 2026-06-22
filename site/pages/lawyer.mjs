@@ -3,7 +3,7 @@ import { lawyer, lawyerHelp, lawyerIntro, serviceScenarios } from "../data/li-yi
 import { services } from "../data/services.mjs";
 import { lawyerFaqs } from "../data/faqs.mjs";
 import { escapeHtml, renderBreadcrumbs, renderLayout } from "../components/layout.mjs";
-import { renderContact, renderFaqs, renderListCards, sectionHeading } from "../components/sections.mjs";
+import { renderContact, renderFaqs, renderListCards, renderOfficialChannels, sectionHeading } from "../components/sections.mjs";
 import {
   breadcrumbSchema,
   faqSchema,
@@ -52,6 +52,7 @@ export const renderLawyer = () => {
       <div class="shell identity-grid">
         <div><span>姓名</span><strong>${lawyer.displayName}</strong></div>
         <div><span>执业机构</span><strong>${lawyer.organization}</strong></div>
+        <div><span>执业证号</span><strong>${lawyer.licenseNumber}</strong></div>
         <div><span>资质核验</span><a href="/qualifications/">如法网官方平台</a></div>
         <div><span>执业城市</span><strong>${lawyer.city}</strong></div>
         <div><span>电话</span><a href="${siteConfig.phoneHref}">${lawyer.phone}</a></div>
@@ -72,7 +73,7 @@ export const renderLawyer = () => {
 
     <section class="section services-section" id="services">
       <div class="shell">
-        ${sectionHeading("家事业务", "长沙婚姻家事九大核心服务", `服务覆盖${areaText}，围绕长沙本地家事调解流程与裁判口径，提供更贴近本地场景的法律服务。`)}
+        ${sectionHeading("离婚业务", "长沙婚姻家事九大核心服务", `服务覆盖${areaText}，围绕长沙本地家事调解流程与裁判口径，提供更贴近本地场景的法律服务。`)}
         <p class="large-copy">常见事项包括长沙离婚立案材料整理、彩礼纠纷调解准备、离婚房产分割、子女抚养权争议、离婚协议审查、夫妻共同债务分析、婚内财产约定、婚前婚后协议设计、家事谈判与调解。</p>
         <div class="service-grid compact">${services.slice(0, 9).map((service) => `<a class="service-card" href="${service.path}"><h3>${escapeHtml(service.name)}</h3><p>${escapeHtml(service.summary)}</p><strong>查看服务说明 →</strong></a>`).join("")}</div>
       </div>
@@ -117,6 +118,7 @@ export const renderLawyer = () => {
 
     <section class="section"><div class="shell narrow legal-note"><strong>页面合规说明</strong><p>${siteConfig.footerOfficialText}</p></div></section>
 
+    ${renderOfficialChannels()}
     ${renderFaqs(lawyerFaqs, { title: "关于李英姿律师服务的常见问题" })}
     ${renderContact()}`;
 
