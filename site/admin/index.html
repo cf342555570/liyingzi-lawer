@@ -4,99 +4,427 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow">
-  <title>内容管理｜英姿律见</title>
+  <title>英姿律见后台｜普法文章编辑</title>
   <style>
-    :root { font-family: "Noto Sans SC", "Microsoft YaHei", system-ui, sans-serif; color: #182521; background: #f7f4ed; }
-    body { margin: 0; min-height: 100vh; display: grid; place-items: center; }
-    .login-card { width: min(420px, calc(100vw - 32px)); padding: 34px; border: 1px solid #d8ddd8; border-top: 4px solid #b89a61; background: #fff; box-shadow: 0 24px 70px rgba(5,31,26,.12); }
-    h1 { margin: 0 0 10px; color: #0a2923; font: 700 28px/1.35 "Songti SC", serif; }
-    p { margin: 0 0 20px; color: #64706b; line-height: 1.7; }
-    label { display: block; margin: 14px 0 6px; color: #103a31; font-weight: 700; }
-    input { display: block; inline-size: stretch; min-height: 44px; padding: 8px 12px; border: 1px solid #cfd7d2; border-radius: 4px; font: inherit; box-sizing: border-box; }
-    button { display: block; inline-size: stretch; min-height: 46px; margin-top: 20px; border: 0; border-radius: 4px; color: #fff; background: #103a31; font: inherit; font-weight: 800; cursor: pointer; }
-    .error { min-height: 22px; margin-top: 12px; color: #9b2d20; font-size: 13px; }
-    .note { margin-top: 18px; color: #7b817c; font-size: 12px; }
+    :root {
+      --ink: #172822;
+      --muted: #65736d;
+      --line: #dfe5df;
+      --panel: #ffffff;
+      --soft: #f7f4ed;
+      --brand: #12352d;
+      --gold: #b89a61;
+      --danger: #9b2d20;
+      font-family: "Noto Sans SC", "Microsoft YaHei", system-ui, sans-serif;
+      color: var(--ink);
+      background: var(--soft);
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; background: #f2f4f1; }
+    button, input, select, textarea { font: inherit; }
+    a { color: inherit; }
+    .login-screen { min-height: 100vh; display: grid; place-items: center; padding: 24px; }
+    .login-card { inline-size: min(430px, calc(100vw - 32px)); padding: 34px; border: 1px solid var(--line); border-top: 4px solid var(--gold); background: #fff; box-shadow: 0 24px 70px rgba(5,31,26,.12); }
+    .login-card h1 { margin: 0 0 10px; color: #0a2923; font: 700 28px/1.35 "Songti SC", serif; }
+    .login-card p { margin: 0 0 20px; color: var(--muted); line-height: 1.7; }
+    label { display: block; margin: 0 0 7px; color: #12352d; font-weight: 700; }
+    input, select, textarea { inline-size: stretch; border: 1px solid #ccd6d0; border-radius: 6px; background: #fff; color: var(--ink); outline: none; }
+    input, select { min-height: 42px; padding: 8px 11px; }
+    textarea { min-height: 150px; padding: 12px; line-height: 1.75; resize: vertical; }
+    input:focus, select:focus, textarea:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(184,154,97,.16); }
+    .login-card input { margin-bottom: 14px; }
+    .btn { min-height: 42px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 0 16px; border: 0; border-radius: 6px; background: var(--brand); color: #fff; font-weight: 800; cursor: pointer; text-decoration: none; white-space: nowrap; }
+    .btn.secondary { background: #e8e3d7; color: #12352d; }
+    .btn.ghost { background: #fff; color: var(--brand); border: 1px solid #cfd8d1; }
+    .btn.danger { background: var(--danger); }
+    .btn.full { inline-size: stretch; }
+    .error { min-height: 22px; margin-top: 12px; color: var(--danger); font-size: 13px; }
+    .app { min-height: 100vh; display: none; grid-template-columns: 250px minmax(0, 1fr); }
+    .sidebar { background: #0f2c25; color: #e9f0ec; padding: 22px 18px; position: sticky; top: 0; height: 100vh; }
+    .brand { margin-bottom: 28px; }
+    .brand strong { display: block; font-size: 22px; letter-spacing: .04em; }
+    .brand span { display: block; color: #b9c6c0; margin-top: 6px; font-size: 13px; }
+    .nav-btn { inline-size: stretch; min-height: 42px; margin: 4px 0; border: 0; border-radius: 6px; background: transparent; color: #dfe8e3; text-align: left; padding: 0 12px; cursor: pointer; }
+    .nav-btn.active, .nav-btn:hover { background: rgba(255,255,255,.1); color: #fff; }
+    .side-note { margin-top: 22px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,.14); color: #bcc9c4; font-size: 12px; line-height: 1.7; }
+    .main { padding: 0; min-width: 0; }
+    .topbar { min-height: 66px; display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 0 26px; background: #fff; border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 3; }
+    .topbar h1 { margin: 0; font-size: 20px; }
+    .top-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+    .workspace { padding: 24px 26px 38px; }
+    .panel { background: #fff; border: 1px solid var(--line); border-radius: 8px; box-shadow: 0 16px 40px rgba(22,37,31,.06); margin-bottom: 18px; }
+    .panel-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 18px; border-bottom: 1px solid var(--line); }
+    .panel-head h2 { margin: 0; font-size: 18px; }
+    .panel-body { padding: 18px; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    .field { min-width: 0; }
+    .field.full { grid-column: 1 / -1; }
+    .hint { margin: 7px 0 0; color: var(--muted); font-size: 12px; line-height: 1.6; }
+    .editor-wrap { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 18px; align-items: start; }
+    .title-input { border: 0; border-bottom: 1px solid var(--line); border-radius: 0; font-size: 28px; font-weight: 800; padding: 10px 0; min-height: 58px; }
+    .title-input:focus { box-shadow: none; border-color: var(--gold); }
+    .body-editor { min-height: 470px; border-radius: 8px; font-size: 15px; background: #fff; }
+    .toolbar { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0; }
+    .tool { min-height: 34px; padding: 0 10px; border: 1px solid #cfd8d1; border-radius: 5px; background: #fff; color: var(--brand); cursor: pointer; }
+    .preview { background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 18px; max-height: 650px; overflow: auto; }
+    .preview h1 { margin-top: 0; line-height: 1.35; }
+    .preview .meta { color: var(--muted); font-size: 13px; border-bottom: 1px solid var(--line); padding-bottom: 12px; margin-bottom: 16px; }
+    .preview article { line-height: 1.85; color: #26352f; }
+    .preview h2 { margin-top: 1.5em; font-size: 20px; }
+    .preview p { margin: 0 0 1em; }
+    .output { white-space: pre-wrap; min-height: 160px; background: #fbfcfb; border: 1px solid var(--line); border-radius: 8px; padding: 14px; color: #20352e; overflow: auto; }
+    .bottom-bar { position: sticky; bottom: 0; display: flex; justify-content: space-between; gap: 12px; padding: 14px 26px; background: rgba(255,255,255,.96); border-top: 1px solid var(--line); backdrop-filter: blur(10px); }
+    .bottom-bar .group { display: flex; gap: 10px; flex-wrap: wrap; }
+    .table { inline-size: stretch; border-collapse: collapse; }
+    .table th, .table td { border-bottom: 1px solid var(--line); padding: 12px; text-align: left; vertical-align: top; }
+    .table th { color: var(--muted); font-size: 13px; font-weight: 700; background: #fafafa; }
+    .json-area { min-height: 260px; font-family: Consolas, "Courier New", monospace; font-size: 13px; }
+    .hidden { display: none !important; }
+    @media (max-width: 980px) {
+      .app { grid-template-columns: 1fr; }
+      .sidebar { position: static; height: auto; }
+      .editor-wrap { grid-template-columns: 1fr; }
+      .grid { grid-template-columns: 1fr; }
+      .topbar, .workspace, .bottom-bar { padding-left: 16px; padding-right: 16px; }
+    }
   </style>
 </head>
 <body>
-  <div class="login-card" id="login-card">
-    <h1>英姿律见后台</h1>
-    <p>发文、导航、站点设置、FAQ 和普法专栏批量导入都在这里处理。公开页保持静态输出，不影响收录结构。</p>
-    <div style="display:grid;gap:12px;margin:18px 0 22px;">
-      <a class="button" href="/admin/import/">批量导入普法文章</a>
-      <a class="button" href="/admin/#/collections/articles">进入发文后台</a>
-      <a class="button" href="/admin/#/collections/navigation">调整导航栏</a>
-      <a class="button" href="/admin/#/collections/site_config/entries/site_config">模板与站点设置</a>
+  <section class="login-screen" id="login-screen">
+    <div class="login-card">
+      <h1>英姿律见后台</h1>
+      <p>用于撰写普法文章、生成 Markdown 文件、批量导入内容、调整导航与站点配置。公开网站仍保持静态页面，不影响 SEO/GEO。</p>
+      <form id="login-form">
+        <label for="account">账号</label>
+        <input id="account" name="account" autocomplete="username" inputmode="numeric" placeholder="请输入手机号">
+        <label for="password">密码</label>
+        <input id="password" name="password" type="password" autocomplete="current-password" placeholder="请输入密码">
+        <button class="btn full" type="submit">登录后台</button>
+        <div class="error" id="login-error" role="alert"></div>
+      </form>
     </div>
-    <form id="login-form">
-      <label for="account">账号</label>
-      <input id="account" name="account" autocomplete="username" inputmode="numeric" placeholder="请输入手机号">
-      <label for="password">密码</label>
-      <input id="password" name="password" type="password" autocomplete="current-password" placeholder="请输入密码">
-      <button type="submit">登录后台</button>
-      <div class="error" id="login-error" role="alert"></div>
-    </form>
-    <p class="note">提示：这是静态站点的本地管理入口，不作为公网安全认证系统使用。</p>
-    <div class="note" id="admin-status" aria-live="polite"></div>
-  </div>
+  </section>
+
+  <section class="app" id="app">
+    <aside class="sidebar">
+      <div class="brand"><strong>英姿律见</strong><span>内容管理后台</span></div>
+      <button class="nav-btn active" type="button" data-panel="article-panel">普法发文</button>
+      <button class="nav-btn" type="button" data-panel="batch-panel">批量导入</button>
+      <button class="nav-btn" type="button" data-panel="nav-panel">导航配置</button>
+      <button class="nav-btn" type="button" data-panel="site-panel">站点设置</button>
+      <button class="nav-btn" type="button" data-panel="help-panel">发布说明</button>
+      <div class="side-note">后台生成的是文章源文件。发布到 GitHub Pages 前，需要把生成的 Markdown 放入 content/articles/，再构建并提交。</div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <h1 id="panel-title">普法发文</h1>
+        <div class="top-actions">
+          <a class="btn ghost" href="/articles/" target="_blank" rel="noopener">查看普法专栏</a>
+          <button class="btn secondary" type="button" id="logout">退出</button>
+        </div>
+      </header>
+
+      <div class="workspace">
+        <section class="panel admin-panel" id="article-panel">
+          <div class="panel-head"><h2>新建普法文章</h2><span class="hint">类似内容平台发文：先写标题，再写摘要、分类和正文。</span></div>
+          <div class="panel-body">
+            <div class="editor-wrap">
+              <div>
+                <input class="title-input" id="title" placeholder="请输入文章标题">
+                <div class="grid" style="margin-top:16px;">
+                  <div class="field">
+                    <label for="slug">URL 标识</label>
+                    <input id="slug" placeholder="例如 changsha-lihun-fangchan">
+                    <p class="hint">建议使用拼音/英文，生成 content/articles/slug.md。</p>
+                  </div>
+                  <div class="field">
+                    <label for="date">发布日期</label>
+                    <input id="date" type="date">
+                  </div>
+                  <div class="field">
+                    <label for="category">分类</label>
+                    <select id="category">
+                      <option>离婚纠纷</option>
+                      <option>彩礼返还</option>
+                      <option>离婚房产分割</option>
+                      <option>子女抚养权</option>
+                      <option>离婚协议审查</option>
+                      <option>夫妻共同债务</option>
+                      <option>家事监护</option>
+                      <option>继承家事</option>
+                      <option>实用指南</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label for="cover">封面/插图路径</label>
+                    <input id="cover" placeholder="/assets/images/example.jpg">
+                  </div>
+                  <div class="field full">
+                    <label for="description">摘要</label>
+                    <textarea id="description" style="min-height:84px;" placeholder="用于列表页、搜索摘要和结构化数据。"></textarea>
+                  </div>
+                </div>
+                <div class="toolbar">
+                  <button class="tool" type="button" data-insert="## 问题一句话\n\n">H2</button>
+                  <button class="tool" type="button" data-insert="- ">列表</button>
+                  <button class="tool" type="button" data-insert="![图片说明](/assets/images/example.jpg)\n\n">插图</button>
+                  <button class="tool" type="button" data-template="geo">GEO结构</button>
+                  <button class="tool" type="button" data-template="faq">FAQ结构</button>
+                </div>
+                <label for="body">正文</label>
+                <textarea class="body-editor" id="body" placeholder="正文支持 Markdown。建议结构：问题一句话、结论一句话、典型场景、法律分析、证据清单、常见误区、律师提示、免责声明。"></textarea>
+              </div>
+              <aside class="preview">
+                <h1 id="preview-title">文章标题预览</h1>
+                <div class="meta"><span id="preview-date"></span> · <span id="preview-category"></span> · 李英姿律师</div>
+                <article id="preview-body">正文预览会显示在这里。</article>
+              </aside>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel admin-panel hidden" id="batch-panel">
+          <div class="panel-head"><h2>批量导入文章</h2><span class="hint">支持 JSON 数组，批量生成 Markdown 文件。</span></div>
+          <div class="panel-body">
+            <textarea class="json-area" id="batch-json" placeholder='[{"slug":"changsha-lihun","title":"标题","description":"摘要","date":"2026-06-23","category":"离婚纠纷","body":"## 正文\n\n内容"}]'></textarea>
+            <div class="toolbar">
+              <button class="btn" type="button" id="batch-generate">生成批量文件</button>
+              <button class="btn secondary" type="button" id="copy-json-template">复制模板</button>
+            </div>
+            <div class="output" id="batch-output">等待生成。</div>
+          </div>
+        </section>
+
+        <section class="panel admin-panel hidden" id="nav-panel">
+          <div class="panel-head"><h2>导航配置</h2><span class="hint">生成 navigation.json 内容，复制后替换 site/data/navigation.json。</span></div>
+          <div class="panel-body">
+            <table class="table" id="nav-table">
+              <thead><tr><th>显示文字</th><th>链接地址</th><th>操作</th></tr></thead>
+              <tbody></tbody>
+            </table>
+            <div class="toolbar">
+              <button class="btn secondary" type="button" id="add-nav">新增导航项</button>
+              <button class="btn" type="button" id="generate-nav">生成导航 JSON</button>
+            </div>
+            <div class="output" id="nav-output">等待生成。</div>
+          </div>
+        </section>
+
+        <section class="panel admin-panel hidden" id="site-panel">
+          <div class="panel-head"><h2>站点设置</h2><span class="hint">生成 site-config.json 内容。</span></div>
+          <div class="panel-body">
+            <div class="grid">
+              <div class="field"><label for="site-phone">联系电话</label><input id="site-phone" value="17775815262"></div>
+              <div class="field"><label for="site-wechat">公众号</label><input id="site-wechat" value="英姿律见"></div>
+              <div class="field full"><label for="site-slogan">站点标语</label><input id="site-slogan" value="离婚前，钱、房、债先理清楚"></div>
+              <div class="field full"><label for="site-address">地址</label><input id="site-address" value="长沙市雨花区喜盈门范城C栋三楼"></div>
+              <div class="field full"><label for="site-amap">高德导航链接</label><input id="site-amap" value="https://surl.amap.com/6IhBMYyLgRa"></div>
+              <div class="field full"><label for="site-disclaimer">免责声明</label><textarea id="site-disclaimer">本文内容仅供一般法律知识参考，不构成对具体案件处理结果的承诺。婚姻家事案件差异较大，具体处理方案需结合材料、证据和案件情况综合判断。所有法律业务均由律师事务所统一接受委托并依法办理。</textarea></div>
+            </div>
+            <div class="toolbar"><button class="btn" type="button" id="generate-site">生成站点配置 JSON</button></div>
+            <div class="output" id="site-output">等待生成。</div>
+          </div>
+        </section>
+
+        <section class="panel admin-panel hidden" id="help-panel">
+          <div class="panel-head"><h2>发布说明</h2></div>
+          <div class="panel-body">
+            <p>这个后台是静态发文工作台，不直接在线写入 GitHub。原因是 GitHub Pages 不能在浏览器里直接修改仓库文件。</p>
+            <ol>
+              <li>在“普法发文”里写文章。</li>
+              <li>点击“下载 Markdown”或“复制 Markdown”。</li>
+              <li>把文件放入本地 <code>content/articles/</code>。</li>
+              <li>运行构建、提交并推送，文章会进入 <code>/articles/</code>。</li>
+            </ol>
+            <p>这样前台仍是静态 HTML，利于 SEO/GEO，也避免后台脚本加载失败影响公开页面。</p>
+          </div>
+        </section>
+      </div>
+
+      <div class="bottom-bar">
+        <div class="group"><span class="hint" id="status">已准备。</span></div>
+        <div class="group">
+          <button class="btn ghost" type="button" id="copy-md">复制 Markdown</button>
+          <button class="btn secondary" type="button" id="download-md">下载 Markdown</button>
+          <button class="btn" type="button" id="refresh-preview">更新预览</button>
+        </div>
+      </div>
+    </main>
+  </section>
+
   <script>
     (() => {
+      const $ = (id) => document.getElementById(id);
       const account = "17775815262";
       const password = "123456";
-      const card = document.getElementById("login-card");
-      const form = document.getElementById("login-form");
-      const error = document.getElementById("login-error");
-      const status = document.getElementById("admin-status");
-      const sources = [
-        "https://unpkg.com/decap-cms@3/dist/decap-cms.js",
-        "https://cdn.jsdelivr.net/npm/decap-cms@3/dist/decap-cms.js"
-      ];
-      let loading = false;
-      let loaded = false;
+      const today = new Date().toISOString().slice(0, 10);
+      $("date").value = today;
+      $("preview-date").textContent = today;
+      $("preview-category").textContent = $("category").value;
 
-      const loadScript = (src) =>
-        new Promise((resolve, reject) => {
-          const script = document.createElement("script");
-          script.src = src;
-          script.async = true;
-          script.onload = () => resolve();
-          script.onerror = () => reject(new Error(src));
-          document.body.appendChild(script);
+      const escapeHtml = (value = "") => String(value).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+      const toSlug = (value) => String(value || "").trim().toLowerCase().replace(/[^a-z0-9\u4e00-\u9fa5]+/g, "-").replace(/^-+|-+$/g, "") || `article-${Date.now()}`;
+      const fieldValue = (id) => $(id).value.trim();
+      const frontmatter = (data) => {
+        const lines = ["---"];
+        ["title", "description", "date", "category", "cover"].forEach((key) => {
+          if (data[key]) lines.push(`${key}: ${String(data[key]).replace(/\n/g, " ")}`);
         });
-
-      const loadCms = () => {
-        if (loading || loaded) return;
-        loading = true;
-        error.textContent = "";
-        status.textContent = "正在加载后台编辑器…";
-        (async () => {
-          for (const src of sources) {
-            try {
-              await loadScript(src);
-              loaded = true;
-              status.textContent = "后台编辑器已加载。";
-              card.style.display = "none";
-              return;
-            } catch {
-              continue;
-            }
-          }
-          loading = false;
-          status.textContent = "后台编辑器加载失败，请检查网络后重试。";
-          error.textContent = "编辑器脚本未加载成功，登录卡片会保留在页面上。";
-        })();
+        lines.push("---", "", data.body || "");
+        return lines.join("\n");
       };
-      if (sessionStorage.getItem("liyingziAdmin") === "1") loadCms();
-      form.addEventListener("submit", (event) => {
+      const currentArticle = () => ({
+        slug: toSlug(fieldValue("slug") || fieldValue("title")),
+        title: fieldValue("title") || "未命名文章",
+        description: fieldValue("description"),
+        date: fieldValue("date") || today,
+        category: fieldValue("category"),
+        cover: fieldValue("cover"),
+        body: fieldValue("body")
+      });
+      const renderMarkdownPreview = (md) => {
+        const lines = escapeHtml(md).split("\n");
+        const html = [];
+        let inList = false;
+        for (const line of lines) {
+          if (line.startsWith("## ")) {
+            if (inList) { html.push("</ul>"); inList = false; }
+            html.push(`<h2>${line.slice(3)}</h2>`);
+          } else if (line.startsWith("- ")) {
+            if (!inList) { html.push("<ul>"); inList = true; }
+            html.push(`<li>${line.slice(2)}</li>`);
+          } else if (line.trim()) {
+            if (inList) { html.push("</ul>"); inList = false; }
+            html.push(`<p>${line}</p>`);
+          }
+        }
+        if (inList) html.push("</ul>");
+        return html.join("");
+      };
+      const updatePreview = () => {
+        const data = currentArticle();
+        $("preview-title").textContent = data.title;
+        $("preview-date").textContent = data.date;
+        $("preview-category").textContent = data.category;
+        $("preview-body").innerHTML = renderMarkdownPreview(data.body || "正文预览会显示在这里。");
+      };
+      const downloadText = (filename, text) => {
+        const blob = new Blob([text], { type: "text/markdown;charset=utf-8" });
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = filename;
+        link.click();
+        URL.revokeObjectURL(link.href);
+      };
+      const insertAtCursor = (text) => {
+        const area = $("body");
+        const start = area.selectionStart || 0;
+        const end = area.selectionEnd || 0;
+        area.value = area.value.slice(0, start) + text + area.value.slice(end);
+        area.focus();
+        area.selectionStart = area.selectionEnd = start + text.length;
+        updatePreview();
+      };
+      const templates = {
+        geo: "## 问题一句话\n\n\n## 结论一句话\n\n\n## 典型场景\n\n- \n\n## 法律分析\n\n\n## 证据清单\n\n- \n\n## 常见误区\n\n- \n\n## 李英姿律师提示\n\n\n",
+        faq: "## 常见问题\n\n### 1. \n\n\n### 2. \n\n\n### 3. \n\n\n"
+      };
+
+      $("login-form").addEventListener("submit", (event) => {
         event.preventDefault();
-        const values = new FormData(form);
+        const values = new FormData(event.currentTarget);
         if (values.get("account") === account && values.get("password") === password) {
           sessionStorage.setItem("liyingziAdmin", "1");
-          loadCms();
+          $("login-screen").style.display = "none";
+          $("app").style.display = "grid";
+          updatePreview();
         } else {
-          error.textContent = "账号或密码不正确";
+          $("login-error").textContent = "账号或密码不正确";
         }
       });
+      if (sessionStorage.getItem("liyingziAdmin") === "1") {
+        $("login-screen").style.display = "none";
+        $("app").style.display = "grid";
+      }
+      $("logout").addEventListener("click", () => {
+        sessionStorage.removeItem("liyingziAdmin");
+        location.reload();
+      });
+      document.querySelectorAll(".nav-btn").forEach((button) => {
+        button.addEventListener("click", () => {
+          document.querySelectorAll(".nav-btn").forEach((item) => item.classList.remove("active"));
+          document.querySelectorAll(".admin-panel").forEach((panel) => panel.classList.add("hidden"));
+          button.classList.add("active");
+          $(button.dataset.panel).classList.remove("hidden");
+          $("panel-title").textContent = button.textContent;
+        });
+      });
+      document.querySelectorAll("[data-insert]").forEach((button) => button.addEventListener("click", () => insertAtCursor(button.dataset.insert)));
+      document.querySelectorAll("[data-template]").forEach((button) => button.addEventListener("click", () => insertAtCursor(templates[button.dataset.template])));
+      ["title", "description", "date", "category", "body"].forEach((id) => $(id).addEventListener("input", updatePreview));
+      $("refresh-preview").addEventListener("click", updatePreview);
+      $("copy-md").addEventListener("click", async () => {
+        const data = currentArticle();
+        await navigator.clipboard.writeText(frontmatter(data));
+        $("status").textContent = `已复制 ${data.slug}.md`;
+      });
+      $("download-md").addEventListener("click", () => {
+        const data = currentArticle();
+        downloadText(`${data.slug}.md`, frontmatter(data));
+        $("status").textContent = `已下载 ${data.slug}.md`;
+      });
+
+      const navItems = [
+        ["首页", "/"], ["律师介绍", "/lawyers/li-yingzi/"], ["离婚业务", "/#services"], ["区县服务", "/areas/"], ["案例分析", "/case-analysis/"], ["普法专栏", "/articles/"], ["FAQ", "/faq/"], ["联系", "/contact/"]
+      ];
+      const renderNavRows = () => {
+        const tbody = document.querySelector("#nav-table tbody");
+        tbody.innerHTML = navItems.map(([label, href], index) => `<tr><td><input data-nav-label="${index}" value="${escapeHtml(label)}"></td><td><input data-nav-href="${index}" value="${escapeHtml(href)}"></td><td><button class="tool" type="button" data-remove-nav="${index}">删除</button></td></tr>`).join("");
+      };
+      renderNavRows();
+      $("add-nav").addEventListener("click", () => { navItems.push(["新导航", "/"]); renderNavRows(); });
+      $("generate-nav").addEventListener("click", () => {
+        document.querySelectorAll("[data-nav-label]").forEach((input) => { navItems[Number(input.dataset.navLabel)][0] = input.value; });
+        document.querySelectorAll("[data-nav-href]").forEach((input) => { navItems[Number(input.dataset.navHref)][1] = input.value; });
+        $("nav-output").textContent = JSON.stringify({ items: navItems.map(([label, href]) => ({ label, href })) }, null, 2);
+      });
+      document.addEventListener("click", (event) => {
+        const target = event.target.closest("[data-remove-nav]");
+        if (!target) return;
+        navItems.splice(Number(target.dataset.removeNav), 1);
+        renderNavRows();
+      });
+      $("generate-site").addEventListener("click", () => {
+        $("site-output").textContent = JSON.stringify({
+          phone: fieldValue("site-phone"),
+          wechat: fieldValue("site-wechat"),
+          address: fieldValue("site-address"),
+          amapNavigationUrl: fieldValue("site-amap"),
+          transitNote: "大塘地铁站5号口步行约330米",
+          slogan: fieldValue("site-slogan"),
+          disclaimer: fieldValue("site-disclaimer"),
+          sloganNotice: "具体案件需结合事实、证据和法律规定综合判断，本站内容不构成对案件结果的承诺。"
+        }, null, 2);
+      });
+      $("copy-json-template").addEventListener("click", async () => {
+        const sample = [{ slug: "changsha-lihun-example", title: "长沙离婚问题示例标题", description: "这里写摘要。", date: today, category: "离婚纠纷", body: "## 问题一句话\n\n## 结论一句话\n\n" }];
+        await navigator.clipboard.writeText(JSON.stringify(sample, null, 2));
+        $("batch-output").textContent = "模板已复制。";
+      });
+      $("batch-generate").addEventListener("click", () => {
+        try {
+          const records = JSON.parse($("batch-json").value || "[]");
+          const list = (Array.isArray(records) ? records : [records]).map((item) => {
+            const slug = toSlug(item.slug || item.title);
+            return `### ${slug}.md\n\n${frontmatter({ ...item, slug })}`;
+          });
+          $("batch-output").textContent = list.join("\n\n---\n\n") || "没有可生成的数据。";
+        } catch (error) {
+          $("batch-output").textContent = `JSON 解析失败：${error.message}`;
+        }
+      });
+      updatePreview();
     })();
   </script>
 </body>
