@@ -37,6 +37,7 @@
       <div class="error" id="login-error" role="alert"></div>
     </form>
     <p class="note">提示：这是静态站点的本地管理入口，不作为公网安全认证系统使用。</p>
+    <div class="note" id="admin-status" aria-live="polite"></div>
   </div>
   <script>
     (() => {
@@ -45,11 +46,45 @@
       const card = document.getElementById("login-card");
       const form = document.getElementById("login-form");
       const error = document.getElementById("login-error");
+      const status = document.getElementById("admin-status");
+      const sources = [
+        "https://unpkg.com/decap-cms@3/dist/decap-cms.js",
+        "https://cdn.jsdelivr.net/npm/decap-cms@3/dist/decap-cms.js"
+      ];
+      let loading = false;
+      let loaded = false;
+
+      const loadScript = (src) =>
+        new Promise((resolve, reject) => {
+          const script = document.createElement("script");
+          script.src = src;
+          script.async = true;
+          script.onload = () => resolve();
+          script.onerror = () => reject(new Error(src));
+          document.body.appendChild(script);
+        });
+
       const loadCms = () => {
-        card.remove();
-        const script = document.createElement("script");
-        script.src = "https://unpkg.com/decap-cms@3/dist/decap-cms.js";
-        document.body.appendChild(script);
+        if (loading || loaded) return;
+        loading = true;
+        error.textContent = "";
+        status.textContent = "正在加载后台编辑器…";
+        (async () => {
+          for (const src of sources) {
+            try {
+              await loadScript(src);
+              loaded = true;
+              status.textContent = "后台编辑器已加载。";
+              card.style.display = "none";
+              return;
+            } catch {
+              continue;
+            }
+          }
+          loading = false;
+          status.textContent = "后台编辑器加载失败，请检查网络后重试。";
+          error.textContent = "编辑器脚本未加载成功，登录卡片会保留在页面上。";
+        })();
       };
       if (sessionStorage.getItem("liyingziAdmin") === "1") loadCms();
       form.addEventListener("submit", (event) => {
