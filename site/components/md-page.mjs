@@ -20,7 +20,7 @@ export const parseFrontmatter = (content) => {
 
 export const renderMdPage = async (filePath, options = {}) => {
   const raw = await readFile(filePath, "utf8");
-  const { title, description, date, category, body } = parseFrontmatter(raw);
+  const { title, description, date, category, cover, source, sourceUrl, body } = parseFrontmatter(raw);
 
   const pagePath = options.path || `/${filePath.replace(/\\/g, "/").replace(/^content\//, "").replace(/\.md$/, "")}/`;
   const displayTitle = title || options.defaultTitle || "未命名";
@@ -43,7 +43,9 @@ export const renderMdPage = async (filePath, options = {}) => {
         <h1 id="md-title">${escapeHtml(displayTitle)}</h1>
         <p style="color:#666;font-size:0.875rem;">发布日期：${displayDate} · ${lawyer.displayName} · ${lawyer.organization}</p>
         <p class="legal-note">${siteConfig.sloganNotice}</p>
+        ${cover ? `<figure class="article-cover" style="margin:1.5rem 0;"><img src="${escapeHtml(cover)}" alt="${escapeHtml(displayTitle)}" style="display:block;inline-size:72rem;max-inline-size:100vw;height:auto;border-radius:8px;"></figure>` : ""}
         ${renderMarkdown(body)}
+        ${source || sourceUrl ? `<p style="margin-top:1.5rem;font-size:0.95rem;color:#555;">${source ? `${escapeHtml(source)}` : ""}${source && sourceUrl ? " · " : ""}${sourceUrl ? `<a href="${escapeHtml(sourceUrl)}" target="_blank" rel="noopener">原始链接</a>` : ""}</p>` : ""}
         <div class="privacy-card" style="background:#f8f6f0;padding:1.5rem;border-radius:8px;margin:2rem 0;">
           <p class="eyebrow">说明</p>
           <p>${siteConfig.disclaimer}</p>

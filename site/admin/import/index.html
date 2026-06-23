@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>批量导入普法文章｜英姿律见后台</title>
+  <style>
+    :root { font-family: "Noto Sans SC","Microsoft YaHei",system-ui,sans-serif; color:#12302a; background:#f6f3ea; }
+    body { margin:0; min-height:100vh; background:linear-gradient(180deg,#f6f3ea 0,#fff 40%); }
+    .wrap { max-width:1100px; margin:0 auto; padding:32px 20px 56px; }
+    .topbar { display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap; margin-bottom:24px; }
+    h1 { margin:0; font:700 30px/1.2 "Songti SC",serif; }
+    .muted { color:#66756f; line-height:1.7; }
+    .panel { background:#fff; border:1px solid #d9dfd7; border-top:4px solid #b79b60; border-radius:8px; padding:20px; box-shadow:0 20px 50px rgba(3,32,25,.08); margin-bottom:20px; }
+    textarea, .file-input { inline-size:72rem; max-inline-size:calc(100vw - 2rem); box-sizing:border-box; }
+    textarea { min-height:260px; padding:14px; border:1px solid #cfd7cf; border-radius:6px; font:14px/1.7 Consolas,monospace; }
+    input[type="file"] { padding:12px 0; }
+    button, .btn { display:inline-flex; align-items:center; justify-content:center; min-height:44px; padding:0 16px; border:0; border-radius:6px; background:#12302a; color:#fff; text-decoration:none; font-weight:700; cursor:pointer; }
+    .btn.secondary { background:#e8e2d4; color:#12302a; }
+    .grid { display:grid; gap:16px; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); }
+    .row { display:flex; gap:12px; flex-wrap:wrap; margin-top:14px; }
+    .log { white-space:pre-wrap; background:#f8faf8; border:1px solid #e2e8e2; padding:14px; border-radius:6px; min-height:80px; }
+    code { background:#f2efe6; padding:0 4px; border-radius:4px; }
+    .note { font-size:13px; color:#6c736e; }
+    .card { border:1px solid #e0e5dc; border-radius:8px; padding:16px; background:#fcfcfb; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <div>
+        <h1>批量导入普法文章</h1>
+        <p class="muted">支持 JSON 批量导入、Markdown 直接写入，以及把内容批量生成到 <code>content/articles/</code>。</p>
+      </div>
+      <a class="btn secondary" href="/admin/">返回后台</a>
+    </div>
+
+    <section class="panel">
+      <h2>导入方式</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>1. 粘贴 JSON</h3>
+          <p class="note">每条记录建议包含 <code>title</code>、<code>description</code>、<code>date</code>、<code>category</code>、<code>body</code>、<code>slug</code>。</p>
+        </div>
+        <div class="card">
+          <h3>2. 上传文件</h3>
+          <p class="note">可上传多个 <code>.json</code> 或 <code>.md</code> 文件，统一写入目标文件夹。</p>
+        </div>
+        <div class="card">
+          <h3>3. 直接写入</h3>
+          <p class="note">选择本地 <code>content/articles/</code> 文件夹后，页面可直接创建/覆盖文章文件。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>导入数据</h2>
+      <input id="file-input" class="file-input" type="file" accept=".json,.md,.txt" multiple>
+      <textarea id="payload" placeholder="粘贴 JSON 数组或单条 JSON 对象。Markdown 文件可直接上传。"></textarea>
+      <div class="row">
+        <button id="pick-folder" type="button">选择目标文件夹</button>
+        <button id="run-import" type="button">开始导入</button>
+        <button id="copy-template" type="button" class="btn secondary">复制 JSON 模板</button>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>处理结果</h2>
+      <div id="log" class="log">等待导入…</div>
+    </section>
+  </div>
+
+  <script>
+    (() => {
+      const state = { dir: null };
+      const payload = document.getElementById('payload');
+      const fileInput = document.getElementById('file-input');
+      const log = document.getElementById('log');
+      const updateLog = (text) => { log.textContent = text; };
+      const encodeFrontmatter = (obj) => {
+        const order = ['title','description','date','category','cover','source','sourceUrl'];
+        const lines = ['---'];
+        for (const key of order) {
+          if (obj[key] === undefined || obj[key] === null || obj[key] === '') continue;
+          lines.push(`${key}: ${String(obj[key]).replace(/\n/g, ' ').trim()}`);
+        }
+        lines.push('---', '', obj.body || '');
+        return lines.join('\n');
+      };
+      const toSlug = (value, fallback) => {
+        const base = String(value || '').trim().toLowerCase().replace(/[^a-z0-9\u4e00-\u9fa5]+/g, '-').replace(/^-+|-+$/g, '');
+        return base || fallback;
+      };
+      const normalizeRecords = async () => {
+        const files = Array.from(fileInput.files || []);
+        const records = [];
+        for (const file of files) {
+          const text = await file.text();
+          if (file.name.endsWith('.md')) {
+            records.push({ kind: 'md', filename: file.name, content: text });
+            continue;
+          }
+          if (file.name.endsWith('.json') || file.name.endsWith('.txt')) {
+            const json = JSON.parse(text);
+            const items = Array.isArray(json) ? json : [json];
+            for (const item of items) records.push({ kind: 'json', data: item });
+          }
+        }
+        const text = payload.value.trim();
+        if (text) {
+          const json = JSON.parse(text);
+          const items = Array.isArray(json) ? json : [json];
+          for (const item of items) records.push({ kind: 'json', data: item });
+        }
+        return records;
+      };
+      const ensureDir = async () => {
+        if (state.dir) return state.dir;
+        if (!window.showDirectoryPicker) throw new Error('当前浏览器不支持目录写入，请使用 Chrome / Edge。');
+        state.dir = await window.showDirectoryPicker({ mode: 'readwrite' });
+        return state.dir;
+      };
+      const writeFile = async (name, content) => {
+        const dir = await ensureDir();
+        const handle = await dir.getFileHandle(name, { create: true });
+        const writable = await handle.createWritable();
+        await writable.write(content);
+        await writable.close();
+      };
+      document.getElementById('pick-folder').addEventListener('click', async () => {
+        try {
+          await ensureDir();
+          updateLog('已选择目标文件夹，可以开始导入。');
+        } catch (error) {
+          updateLog(`选择文件夹失败：${error.message}`);
+        }
+      });
+      document.getElementById('copy-template').addEventListener('click', async () => {
+        const template = [
+          '[',
+          '  {',
+          '    "slug": "changsha-lihun-shiji",',
+          '    "title": "长沙离婚时房产怎么分",',
+          '    "description": "示例描述",',
+          '    "date": "2026-06-22",',
+          '    "category": "离婚房产分割",',
+          '    "cover": "/assets/images/example.jpg",',
+          '    "source": "整理自旧站婚姻家事主题",',
+          '    "sourceUrl": "",',
+          '    "body": "## 正文\\n\\n这里写文章正文。"',
+          '  }',
+          ']'
+        ].join('\\n');
+        await navigator.clipboard.writeText(template);
+        updateLog('JSON 模板已复制到剪贴板。');
+      });
+      document.getElementById('run-import').addEventListener('click', async () => {
+        try {
+          const records = await normalizeRecords();
+          if (!records.length) throw new Error('没有可导入的数据。');
+          let count = 0;
+          const output = [];
+          for (let i = 0; i < records.length; i++) {
+            const record = records[i];
+            if (record.kind === 'md') {
+              const fallback = record.filename.replace(/\.md$/i, '');
+              await writeFile(record.filename, record.content);
+              output.push(`已写入 Markdown：${record.filename}`);
+              count++;
+              continue;
+            }
+            const item = record.data || {};
+            const slug = toSlug(item.slug || item.title, `article-${Date.now()}-${i + 1}`);
+            const filename = `${slug}.md`;
+            const markdown = encodeFrontmatter(item);
+            await writeFile(filename, markdown);
+            output.push(`已写入：${filename} ← ${item.title || '未命名'}`);
+            count++;
+          }
+          updateLog(`导入完成，共处理 ${count} 条记录。\\n\\n${output.join('\\n')}`);
+        } catch (error) {
+          updateLog(`导入失败：${error.message}`);
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

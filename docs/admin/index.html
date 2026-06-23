@@ -21,7 +21,13 @@
 <body>
   <div class="login-card" id="login-card">
     <h1>英姿律见后台</h1>
-    <p>用于本地管理文章、指南、导航栏和基础站点内容。线上发布仍需重新构建并提交到 GitHub。</p>
+    <p>发文、导航、站点设置、FAQ 和普法专栏批量导入都在这里处理。公开页保持静态输出，不影响收录结构。</p>
+    <div style="display:grid;gap:12px;margin:18px 0 22px;">
+      <a class="button" href="/admin/import/">批量导入普法文章</a>
+      <a class="button" href="/admin/#/collections/articles">进入发文后台</a>
+      <a class="button" href="/admin/#/collections/navigation">调整导航栏</a>
+      <a class="button" href="/admin/#/collections/site_config/entries/site_config">模板与站点设置</a>
+    </div>
     <form id="login-form">
       <label for="account">账号</label>
       <input id="account" name="account" autocomplete="username" inputmode="numeric" placeholder="请输入手机号">

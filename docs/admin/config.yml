@@ -29,6 +29,9 @@ collections:
       - { label: "描述", name: "description", widget: "text" }
       - { label: "发布日期", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
       - { label: "分类", name: "category", widget: "select", options: ["离婚纠纷", "彩礼返还", "房产分割", "子女抚养", "协议审查", "共同债务", "赠与返还", "离婚谈判", "涉外婚姻", "实用指南"] }
+      - { label: "封面图", name: "cover", widget: "image", required: false }
+      - { label: "来源说明", name: "source", widget: "string", required: false }
+      - { label: "来源链接", name: "sourceUrl", widget: "string", required: false }
       - { label: "正文", name: "body", widget: "markdown" }
     view_filters:
       - { label: "离婚纠纷", field: "category", pattern: "离婚纠纷" }
@@ -59,8 +62,13 @@ collections:
         fields:
           - { label: "联系电话", name: "phone", widget: "string" }
           - { label: "公众号", name: "wechat", widget: "string", default: "英姿律见" }
+          - { label: "站点标语", name: "slogan", widget: "string" }
+          - { label: "地址", name: "address", widget: "string" }
+          - { label: "高德导航链接", name: "amapNavigationUrl", widget: "string" }
+          - { label: "到访提示", name: "transitNote", widget: "string" }
           - { label: "免责声明", name: "disclaimer", widget: "text" }
           - { label: "Slogan提示", name: "sloganNotice", widget: "text" }
+          - { label: "页脚官方说明", name: "footerOfficialText", widget: "text" }
 
   - name: "faqs"
     label: "FAQ管理"
