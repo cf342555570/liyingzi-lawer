@@ -28,11 +28,12 @@ export const renderLawyer = () => {
     { name: "律师介绍", path: lawyerMeta.path }
   ];
   const areaText = siteConfig.districts.join("、");
+  const introBanner = relativeAsset(lawyerMeta.path, "/assets/images/li-yingzi-lawyer-intro-banner.png");
   const body = `
     ${renderBreadcrumbs(breadcrumbs)}
     <section class="hero lawyer-hero">
       <div class="shell lawyer-hero-grid">
-        <figure class="lawyer-profile-photo"><img src="${relativeAsset(lawyerMeta.path, lawyer.imagePath)}" alt="${siteConfig.imageAlt}" width="1672" height="939" fetchpriority="high"></figure>
+        <figure class="lawyer-intro-banner"><img src="${introBanner}" alt="李英姿律师形象图｜英姿律见 湖南泰宗律师事务所" width="1760" height="992" fetchpriority="high"></figure>
         <div class="hero-copy">
           <p class="eyebrow">${lawyer.organization}</p>
           <h1>李英姿律师｜长沙婚姻家事纠纷处理型律师</h1>
